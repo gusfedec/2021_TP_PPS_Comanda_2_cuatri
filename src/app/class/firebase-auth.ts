@@ -127,7 +127,7 @@ export class FirebaseAuth {
 
 		console.log("getImages");
 		var array = new Array(); 
-		this.bringEntity("/image", returnObject, email);
+		this.bringEntity("/image", returnObject);
 		return;
 	}
 
@@ -137,9 +137,8 @@ export class FirebaseAuth {
 		await imageRef.doc("/" + id).set(newObject).then(succ => { console.log("update completed"); });
 	}
 
-	bringEntity(path, returnObject, loggedUserEmail) {
+	bringEntity(path, returnObject) {
 		console.log("bringEntity");
-		console.log("loggedUserEmail", loggedUserEmail);
 		//var returnObject = new Array(); 
 
 
