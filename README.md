@@ -12,17 +12,17 @@ Mínimo 2 integrantes
 
 ## Integrantes:
 
-**Gustavo Federico Casas** 
+- **Gustavo Federico Casas** 
 
-**Yesid Dario Guinard**
+- **Yesid Dario Guinard**
 
-**Sebastian Tomas Argañaras**
+- **Sebastian Tomas Argañaras**
 
 ### Tareas asignadas a cada integrante:
 
 ### Altas
 
-A- Alta de dueño / supervisor **(Casas)**
+A. Alta de dueño / supervisor **(Casas)**
 
 B- Alta de empleados **(Guinard)**
 
@@ -67,12 +67,12 @@ T- Confirmar pedido (por parte del mozo) **(Guinard)**
 
 U- Confirmar realización del pedido (por parte del cocinero o bartender) **(Argañaras)**
 
-v- Generar reservas agendadas / Delivery **(Casas)**
+V- Generar reservas agendadas / Delivery **(Casas)**
 
 ### Delivery
 W- Realizar pedido con GPS o dirección. **(Guinard)**
 
-x- Mapa de ruta hasta el domicilio de entrega. **(Argañaras)**
+X- Mapa de ruta hasta el domicilio de entrega. **(Argañaras)**
 
 ### Juegos
 Y- Juego 10% de descuento. **(Casas)**
