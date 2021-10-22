@@ -1,0 +1,194 @@
+import { Injectable, NgModule } from "@angular/core";
+
+import * as firebase from 'firebase/app';
+import 'firebase/storage';
+import { HttpClientModule } from '@angular/common/http';
+
+
+//import { FirebaseService } from './firebase.service';
+//import { AngularFireAuth } from 'angularfire2/auth';
+//import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+
+
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+import firebaseConfig from '../../environments/environment';
+
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { map } from 'rxjs/operators';
+
+//import {AngularFirestore} from 'angularfire2/firestore';
+//import { auth } from 'firebase/app';
+
+//import { AngularFireAuth } from '@angular/fire/auth';
+
+
+/*@NgModule({
+	imports: [	AngularFireModule.initializeApp(firebaseConfig.firebase),
+				AngularFireAuthModule
+			],
+	providers: [ AngularFireAuth]
+})*/
+
+@Injectable({
+	providedIn: 'root'
+})
+
+export class FirebaseAuth {
+	//firebase = require('firebase');
+
+	constructor(public afAuth: AngularFireAuth,
+		public afs: AngularFirestore,
+		public afDatabase: AngularFireDatabase
+		//private firebaseService: FirebaseService,
+		//public afAuth: AngularFireAuth
+	) { }
+
+	basePicturesPath = "pictures/";
+	cosasLindasPath = "cosasLindas";
+	cosasFeasPath = "cosasLindas";
+	image = "/image";
+
+	async login(user) {
+		try {
+			const res = await this.afAuth.signInWithEmailAndPassword(user.email, user.password);
+		}
+		catch (err) {
+			console.dir(err);
+		}
+	}
+
+	async signIn(user) {
+		try {
+			const res = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
+		}
+		catch (err) {
+			console.dir(err);
+		}
+	}
+
+	addUser(value) {
+		return new Promise<any>((resolve, reject) => {
+			this.afs.collection('/users').add({
+				name: value.name,
+				surname: value.surname,
+				age: parseInt(value.age)
+			})
+				.then(
+					(res) => {
+						resolve(res)
+					},
+					err => reject(err)
+				)
+		})
+	}
+
+	async addImage(value, type, user, relativePath) {
+
+		const selfieRef = firebase.storage().ref(this.basePicturesPath + relativePath);
+		await selfieRef.putString(value, 'base64', { contentType: 'image/png' });
+
+		var download = "";
+
+		await selfieRef.getDownloadURL().then(succ => {
+			download = succ;
+		});
+
+
+		console.log("download", download);
+
+		/*{
+			type: type,
+			image: download,
+			user: user,
+			voto: new Array(),//,
+			fecha: new Date()
+			//date: firebase.database.ServerValue.TIMESTAMP
+		};*/
+
+		this.afs.collection('/image').add({
+			type: type,
+			image: download,
+			user: user,
+			voto: new Array(),//,
+			fecha: new Date()
+		}).then(succ => {
+			console.log("Update on database succeded")
+		}).catch(err => {
+			throw err;
+		});
+	}
+
+	async getImages(returnObject, email) {
+
+		console.log("getImages");
+		var array = new Array(); 
+		this.bringEntity("/image", returnObject, email);
+		return;
+	}
+
+	async saveExistingEntity(path, newObject, id) {
+		//console.log("saveExistingEntity");
+		var imageRef = await this.afs.collection(path).ref;
+		await imageRef.doc("/" + id).set(newObject).then(succ => { console.log("update completed"); });
+	}
+
+	bringEntity(path, returnObject, loggedUserEmail) {
+		console.log("bringEntity");
+		console.log("loggedUserEmail", loggedUserEmail);
+		//var returnObject = new Array(); 
+
+
+		var imageRef = this.afs.collection<any>(path);
+
+		imageRef.snapshotChanges().forEach(snapshot => {
+			var array = new Array();
+			returnObject.length = 0;
+			
+			var postData = snapshot.forEach(doc => {
+
+				var postData = doc.payload.doc.data();
+				console.log(doc.payload.doc['id'], " => ", postData);
+				postData.id = doc.payload.doc['id'];
+				  
+				returnObject.push(postData);
+
+			});
+			return returnObject;
+		});
+	}
+
+	bringEntityWithFilterString2(path, turnos, filterWord){
+		console.log("bringEntityWithFilterString");
+
+		var imageRef = this.afs.collection<any>(path);
+
+		imageRef.get().forEach((snapshot => {
+		//imageRef.snapshotChanges().forEach(snapshot => {
+			//console.log("before snapshto foreach");
+			turnos.length = 0;
+			var postData = snapshot.forEach(doc => {
+				//console.log("inside snapshto foreach");
+
+				var postData = doc.data();
+				//console.log(doc.id, " => ", postData);
+				postData.id = doc.id;
+				
+				var jsonString = JSON.stringify(postData);
+				
+				if(jsonString.includes(filterWord))
+					turnos.push(postData);
+				else if(filterWord == null || filterWord == undefined)
+					turnos.push(postData);
+			});
+			//console.log("after snapshto foreach");
+			//console.log(turnos);
+			return turnos;
+		}));
+	}
+
+}
