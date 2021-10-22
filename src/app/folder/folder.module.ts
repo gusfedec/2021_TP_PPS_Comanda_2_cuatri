@@ -1,3 +1,5 @@
+import { LoginPage } from './../auth/login/login.page';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +10,7 @@ import { FolderPageRoutingModule } from './folder-routing.module';
 
 import { FolderPage } from './folder.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +18,6 @@ import { FolderPage } from './folder.page';
     IonicModule,
     FolderPageRoutingModule
   ],
-  declarations: [FolderPage]
+  declarations: [FolderPage, LoginPage]
 })
 export class FolderPageModule {}
