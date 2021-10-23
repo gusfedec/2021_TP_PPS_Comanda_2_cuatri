@@ -19,7 +19,7 @@ export class SplashPage {
     setTimeout(() => {
       /* this.router.navigate(['tabs']);*/
       this.router.navigate(['/folder/Inbox'], {replaceUrl: true});
-    }, 2500);
+    }, 3000);
   }
 
 }
