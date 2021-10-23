@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-folder',
@@ -10,6 +11,8 @@ export class FolderPage implements OnInit {
   public folder: string;
 
   constructor(private activatedRoute: ActivatedRoute) { }
+
+  usuario = AuthServiceService.usuario;
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
