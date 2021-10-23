@@ -1,3 +1,4 @@
+import { AltaEmpleadoComponent } from './../componentes/alta-empleado/alta-empleado.component';
 import { LoginPage } from './../auth/login/login.page';
 
 import { NgModule } from '@angular/core';
@@ -18,6 +19,6 @@ import { FolderPage } from './folder.page';
     IonicModule,
     FolderPageRoutingModule
   ],
-  declarations: [FolderPage, LoginPage]
+  declarations: [FolderPage, LoginPage, AltaEmpleadoComponent]
 })
 export class FolderPageModule {}

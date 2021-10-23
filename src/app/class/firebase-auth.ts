@@ -49,9 +49,8 @@ export class FirebaseAuth {
 	) { }
 
 	basePicturesPath = "pictures/";
-	cosasLindasPath = "cosasLindas";
-	cosasFeasPath = "cosasLindas";
 	image = "/image";
+	static users = "/users";
 
 	async login(user) {
 		try {
@@ -87,6 +86,25 @@ export class FirebaseAuth {
 		})
 	}
 
+
+
+	async addImageAndReturnURL(value, relativePath) {
+
+		const selfieRef = firebase.storage().ref(this.basePicturesPath + "users/" + relativePath);
+		await selfieRef.putString(value, 'base64', { contentType: 'image/png' });
+
+		var download = "";
+
+		await selfieRef.getDownloadURL().then(succ => {
+			download = succ;
+		});
+
+
+		console.log("download", download);
+		return download;
+
+	}
+
 	async addImage(value, type, user, relativePath) {
 
 		const selfieRef = firebase.storage().ref(this.basePicturesPath + relativePath);
@@ -100,15 +118,6 @@ export class FirebaseAuth {
 
 
 		console.log("download", download);
-
-		/*{
-			type: type,
-			image: download,
-			user: user,
-			voto: new Array(),//,
-			fecha: new Date()
-			//date: firebase.database.ServerValue.TIMESTAMP
-		};*/
 
 		this.afs.collection('/image').add({
 			type: type,
@@ -188,6 +197,19 @@ export class FirebaseAuth {
 			//console.log(turnos);
 			return turnos;
 		}));
+	}
+
+
+	saveNewEntity(path, value){
+		return new Promise<any>((resolve, reject) => {
+			this.afs.collection(path).add(value)
+				.then(
+					(res) => {
+						resolve(res)
+					},
+					err => reject(err)
+				)
+		})
 	}
 
 }
