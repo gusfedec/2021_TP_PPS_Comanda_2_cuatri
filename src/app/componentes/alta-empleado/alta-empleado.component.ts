@@ -56,7 +56,8 @@ export class AltaEmpleadoComponent implements OnInit {
 		"rol": this.roles[1],
 		"nombre": "",
 		"apellido": "",
-		"dni": ""
+    "dni": "",
+    "cuil": ""
 	};
 
 	constructor(public fireAuth: FirebaseAuth,private barcodeScanner: BarcodeScanner, private file: File
@@ -65,7 +66,7 @@ export class AltaEmpleadoComponent implements OnInit {
 		private router: Router) { }
 
     ngOnInit(){
-      
+
     }
 
 	async guardar() {
