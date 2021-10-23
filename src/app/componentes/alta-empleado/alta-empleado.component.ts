@@ -9,6 +9,7 @@ import { File } from '@ionic-native/file/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
 import Swal from 'sweetalert2';
+import { Roles } from '../../componentes/Roles/Roles'
 
 import { Router } from  "@angular/router";
 @Component({
@@ -42,8 +43,9 @@ import { Router } from  "@angular/router";
 export class AltaEmpleadoComponent implements OnInit {
 
   usuarioLoggeado = AuthServiceService.usuario;
-	
-	roles = ["admin", "usuario"];
+  
+  
+	roles = [];
 
 
 	//https://firebasestorage.googleapis.com/v0/b/pps1-251a8.appspot.com/o/pictures%2Fusuarios?alt=media&token=3ca5c1c9-a834-4306-af88-3b4058f816c3
@@ -67,7 +69,11 @@ export class AltaEmpleadoComponent implements OnInit {
 
     ngOnInit(){
 
+      for (let rol in Roles) {
+       this.roles.push(rol);
+      }
     }
+
 
 	async guardar() {
 		var EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
