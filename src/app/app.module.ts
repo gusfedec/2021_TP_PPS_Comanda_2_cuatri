@@ -14,6 +14,13 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 
 
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
+import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,9 +28,15 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
   AngularFireModule.initializeApp(firebaseConfig.firebase),
   AngularFireAuthModule,
-  AngularFireDatabaseModule
+  AngularFireDatabaseModule,
+  BrowserAnimationsModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    BarcodeScanner,
+    File,
+    PhotoLibrary,
+    Camera
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
