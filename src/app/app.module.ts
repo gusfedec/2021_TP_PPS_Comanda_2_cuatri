@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AngularFireModule } from '@angular/fire';
-
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import firebaseConfig from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
@@ -23,7 +23,7 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
   AngularFireAuthModule,
   AngularFireDatabaseModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [SplashScreen,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

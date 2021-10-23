@@ -1,0 +1,60 @@
+ion-content{
+   --background: #751722;
+     width: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    text-align: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: block;
+}
+
+
+
+.container{
+
+    .img1
+    {
+        margin-top: 20px;
+    }
+
+   .img2
+    {
+      margin-top: 80px;
+    }
+
+}
+
+.rotate-center {
+  -webkit-animation: rotate-center 2s ease-in-out both;
+  animation: rotate-center 2s ease-in-out both;
+}
+
+
+/**
+ * ----------------------------------------
+ * animation rotate-center
+ * ----------------------------------------
+ */
+@-webkit-keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
