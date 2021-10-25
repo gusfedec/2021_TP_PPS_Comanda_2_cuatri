@@ -14,10 +14,11 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import Swal from 'sweetalert2';
 
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-alta-empleado',
-  templateUrl: './alta-empleado.component.html',
-  styleUrls: ['./alta-empleado.component.scss'],
+  templateUrl: './alta-empleado.page.html',
+  styleUrls: ['./alta-empleado.page.scss'],
   animations: [
     trigger('inOutAnimation', [
       transition(':enter', [
@@ -31,7 +32,7 @@ import { Router } from '@angular/router';
     ]),
   ],
 })
-export class AltaEmpleadoComponent implements OnInit {
+export class AltaEmpleadoPage implements OnInit {
   usuarioLoggeado = AuthServiceService.usuario;
 
   roles = ['admin', 'usuario'];

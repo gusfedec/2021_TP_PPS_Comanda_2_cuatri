@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {SplashScreen} from '@capacitor/splash-screen';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-splash',
@@ -8,18 +8,15 @@ import {SplashScreen} from '@capacitor/splash-screen';
   styleUrls: ['./splash.page.scss'],
 })
 export class SplashPage {
-
-  constructor(public router: Router) {
-  }
+  constructor(public router: Router) {}
 
   ionViewDidEnter() {
     setTimeout(() => {
-      SplashScreen.hide()
+      SplashScreen.hide();
     }, 10);
     setTimeout(() => {
       /* this.router.navigate(['tabs']);*/
-      this.router.navigate(['/folder/Inbox'], {replaceUrl: true});
+      this.router.navigate(['login'], { replaceUrl: true });
     }, 3000);
   }
-
 }
