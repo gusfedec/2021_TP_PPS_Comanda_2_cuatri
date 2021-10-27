@@ -25,9 +25,18 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'folder/:id',
+    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+  },
+  {
     path: 'alta-empleado',
     loadChildren: () => import('./pages/alta-empleado/alta-empleado.module').then( m => m.AltaEmpleadoPageModule)
   },
+  {
+    path: 'alta-cliente',
+    loadChildren: () => import('./pages/alta-cliente/alta-cliente.module').then( m => m.AltaClientePageModule)
+  },
+
 ];
 
 @NgModule({

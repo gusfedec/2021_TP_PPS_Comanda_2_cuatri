@@ -43,14 +43,14 @@ export class AltaEmpleadoComponent implements OnInit {
 	usuario = {
 		"password": "",
 		"email": "",
-		"foto": "",
+		"foto": "https://www.kindpng.com/picc/m/564-5640631_file-antu-insert-image-svg-insert-image-here.png",
 		"sexo": "",
 		"password2": "",
-		"rol": this.roles[1],
+		"rol": "",
 		"nombre": "",
 		"apellido": "",
-    "dni": "",
-    "cuil": ""
+		"dni": "",
+		"cuil": ""
 	};
 
 	constructor(public fireAuth: FirebaseAuth,private barcodeScanner: BarcodeScanner, private file: File
@@ -61,10 +61,16 @@ export class AltaEmpleadoComponent implements OnInit {
     ngOnInit(){
 
       for (let rol in Roles) {
-       this.roles.push(rol);
+		  if(rol != Roles.Cliente)
+       		this.roles.push(rol);
       }
     }
 
+
+
+	validarDatos(){
+
+	}
 
 	async guardar() {
 		var EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -99,12 +105,14 @@ export class AltaEmpleadoComponent implements OnInit {
 			this.MostarMensaje("Las contraseñas no coinciden");
 			return;
 		}
-		else if (this.usuario.foto == "") {
-			this.MostarMensaje("Subir foto");
+		
+		if (!this.usuario.email.match(EMAIL_REGEX)) {
+			this.MostarMensaje("Formato de mail inválido");
 			return;
 		}
-		else if (!this.usuario.email.match(EMAIL_REGEX)) {
-			this.MostarMensaje("Formato de mail inválido");
+
+		if (this.usuario.foto == "") {
+			this.MostarMensaje("Subir foto");
 			return;
 		}
 
@@ -126,9 +134,10 @@ export class AltaEmpleadoComponent implements OnInit {
 				"email": this.usuario.email,
 				"foto": this.usuario.foto,
 				"rol": this.usuario.rol,
-				"password": this.usuario.password,
-				"sexo": this.usuario.sexo
+				"sexo": this.usuario.sexo,
+				"cuil": this.usuario.cuil
 			};
+
 
 			console.log("Save /user");
 
@@ -239,13 +248,13 @@ export class AltaEmpleadoComponent implements OnInit {
 	presentSwal(){
 		Swal.fire(
 			{
-			title: 'Usuario Registrado!',
+			title: 'Empleado Registrado!',
 			text: 'Será redirigido al listado.',
 			icon: 'success',
 			}
 		  );
 
-		this.router.navigate(['/tabs/tab2']);
+		//this.router.navigate(['/tabs/tab2']);
 	}
 
 	sendEmail(){

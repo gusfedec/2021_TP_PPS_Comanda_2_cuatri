@@ -12,6 +12,7 @@ import { File } from '@ionic-native/file/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import Swal from 'sweetalert2';
+import { Roles } from '../../componentes/Roles/Roles'
 
 import { Router } from '@angular/router';
 
@@ -35,21 +36,22 @@ import { Router } from '@angular/router';
 export class AltaEmpleadoPage implements OnInit {
   usuarioLoggeado = AuthServiceService.usuario;
 
-  roles = ['admin', 'usuario'];
+	roles = [];
 
-  //https://firebasestorage.googleapis.com/v0/b/pps1-251a8.appspot.com/o/pictures%2Fusuarios?alt=media&token=3ca5c1c9-a834-4306-af88-3b4058f816c3
-  usuario = {
-    password: '',
-    email: '',
-    foto: '',
-    sexo: '',
-    password2: '',
-    rol: this.roles[1],
-    nombre: '',
-    apellido: '',
-    dni: '',
-    cuil: '',
-  };
+
+	//https://firebasestorage.googleapis.com/v0/b/pps1-251a8.appspot.com/o/pictures%2Fusuarios?alt=media&token=3ca5c1c9-a834-4306-af88-3b4058f816c3
+	usuario = {
+		"password": "",
+		"email": "",
+		"foto": "https://www.kindpng.com/picc/m/564-5640631_file-antu-insert-image-svg-insert-image-here.png",
+		"sexo": "",
+		"password2": "",
+		"rol": "",
+		"nombre": "",
+		"apellido": "",
+		"dni": "",
+		"cuil": ""
+	};
 
   constructor(
     public fireAuth: FirebaseAuth,
@@ -60,7 +62,13 @@ export class AltaEmpleadoPage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit(){
+
+    for (let rol in Roles) {
+    if(rol != Roles.Cliente)
+         this.roles.push(rol);
+    }
+  }
 
   async guardar() {
     var EMAIL_REGEX =
@@ -93,21 +101,25 @@ export class AltaEmpleadoPage implements OnInit {
       return;
     }
 
-    if (this.usuario.apellido == '') {
-      this.MostarMensaje('Ingrese su apellido.');
-      return;
-    }
+		if (this.usuario.apellido == '') {
+			this.MostarMensaje("Ingrese su apellido.");
+			return;
+		}
 
-    if (this.usuario.password != this.usuario.password2) {
-      this.MostarMensaje('Las contraseñas no coinciden');
-      return;
-    } else if (this.usuario.foto == '') {
-      this.MostarMensaje('Subir foto');
-      return;
-    } else if (!this.usuario.email.match(EMAIL_REGEX)) {
-      this.MostarMensaje('Formato de mail inválido');
-      return;
-    }
+		if (this.usuario.password != this.usuario.password2) {
+			this.MostarMensaje("Las contraseñas no coinciden");
+			return;
+		}
+		
+		if (!this.usuario.email.match(EMAIL_REGEX)) {
+			this.MostarMensaje("Formato de mail inválido");
+			return;
+		}
+
+		if (this.usuario.foto == "") {
+			this.MostarMensaje("Subir foto");
+			return;
+		}
 
     var error;
 
@@ -120,16 +132,16 @@ export class AltaEmpleadoPage implements OnInit {
     if (error == null || error == undefined) {
       var x;
 
-      var user2 = {
-        nombre: this.usuario.nombre,
-        apellido: this.usuario.apellido,
-        dni: this.usuario.dni,
-        email: this.usuario.email,
-        foto: this.usuario.foto,
-        rol: this.usuario.rol,
-        password: this.usuario.password,
-        sexo: this.usuario.sexo,
-      };
+			var user2 = {
+				"nombre": this.usuario.nombre,
+				"apellido": this.usuario.apellido,
+				"dni": this.usuario.dni,
+				"email": this.usuario.email,
+				"foto": this.usuario.foto,
+				"rol": this.usuario.rol,
+				"sexo": this.usuario.sexo,
+				"cuil": this.usuario.cuil
+			};
 
       console.log('Save /user');
 
@@ -251,7 +263,7 @@ export class AltaEmpleadoPage implements OnInit {
       icon: 'success',
     });
 
-    this.router.navigate(['/tabs/tab2']);
+    //this.router.navigate(['/tabs/tab2']);
   }
 
   sendEmail() {

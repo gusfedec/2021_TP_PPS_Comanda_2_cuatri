@@ -16,6 +16,7 @@ export class AppComponent {
     { title: 'logIn', url: '/folder/Log In', icon: 'log-in', rol: ''},
     { title: 'Alta Empleado', url: '/folder/Alta Empleado', icon: 'construct', rol: Roles.Administrador},
     { title: 'Alta Empleado', url: '/folder/Alta Empleado', icon: 'construct', rol: Roles.Dueño},
+    { title: 'Alta Cliente', url: '/folder/Alta Cliente', icon: 'person-add', rol: ''},
     { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
     { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
     { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
