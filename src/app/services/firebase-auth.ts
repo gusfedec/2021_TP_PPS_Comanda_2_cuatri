@@ -51,6 +51,7 @@ export class FirebaseAuth {
 	basePicturesPath = "pictures/";
 	image = "/image";
 	static users = "/users";
+	static clientes = "/clientes";
 
 	async login(user) {
 		try {

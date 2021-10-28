@@ -4,5 +4,7 @@ export enum Roles {
 	Cliente = 'Cliente',
 	Empleado = 'Empleado',
 	Cocinero = 'Cocinero',
-	Mozo = 'Mozo'
+	Mozo = 'Mozo',
+	Metre = 'Metre',
+	Bartender = 'Bartender'
 };

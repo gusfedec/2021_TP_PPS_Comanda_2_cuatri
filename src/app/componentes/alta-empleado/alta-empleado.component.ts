@@ -1,47 +1,38 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { trigger, transition, animate, style } from '@angular/animations'
+import { trigger, transition, animate, style } from '@angular/animations';
 import { AuthServiceService } from '../../services/auth-service.service';
-import { FirebaseAuth } from '../../class/firebase-auth';
+import { FirebaseAuth } from '../../services/firebase-auth';
 
-import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import {
+  BarcodeScanner,
+  BarcodeScannerOptions,
+} from '@ionic-native/barcode-scanner/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
-import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import Swal from 'sweetalert2';
 import { Roles } from '../../componentes/Roles/Roles'
 
-import { Router } from  "@angular/router";
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-alta-empleado',
   templateUrl: './alta-empleado.component.html',
   styleUrls: ['./alta-empleado.component.scss'],
   animations: [
-		trigger(
-			'inOutAnimation',
-			[
-				transition(
-					':enter',
-					[style({ width: 0, opacity: 0 }),
-					animate('1s ease-in',
-						style({ width: 2000, opacity: 1 }))
-
-					]
-				),
-				transition(
-					':leave',
-					[
-						style({ height: 0, opacity: 0 }),
-						animate('1s ease-out',
-							style({ height: 300, opacity: 1 }))
-					]
-				)
-			]
-		)
-	]
+    trigger('inOutAnimation', [
+      transition(':enter', [
+        style({ width: 0, opacity: 0 }),
+        animate('1s ease-in', style({ width: 2000, opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({ height: 0, opacity: 0 }),
+        animate('1s ease-out', style({ height: 300, opacity: 1 })),
+      ]),
+    ]),
+  ],
 })
 export class AltaEmpleadoComponent implements OnInit {
-
   usuarioLoggeado = AuthServiceService.usuario;
   
   
@@ -52,14 +43,14 @@ export class AltaEmpleadoComponent implements OnInit {
 	usuario = {
 		"password": "",
 		"email": "",
-		"foto": "",
+		"foto": "https://www.kindpng.com/picc/m/564-5640631_file-antu-insert-image-svg-insert-image-here.png",
 		"sexo": "",
 		"password2": "",
-		"rol": this.roles[1],
+		"rol": "",
 		"nombre": "",
 		"apellido": "",
-    "dni": "",
-    "cuil": ""
+		"dni": "",
+		"cuil": ""
 	};
 
 	constructor(public fireAuth: FirebaseAuth,private barcodeScanner: BarcodeScanner, private file: File
@@ -70,10 +61,16 @@ export class AltaEmpleadoComponent implements OnInit {
     ngOnInit(){
 
       for (let rol in Roles) {
-       this.roles.push(rol);
+		  if(rol != Roles.Cliente)
+       		this.roles.push(rol);
       }
     }
 
+
+
+	validarDatos(){
+
+	}
 
 	async guardar() {
 		var EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -108,12 +105,14 @@ export class AltaEmpleadoComponent implements OnInit {
 			this.MostarMensaje("Las contraseñas no coinciden");
 			return;
 		}
-		else if (this.usuario.foto == "") {
-			this.MostarMensaje("Subir foto");
+		
+		if (!this.usuario.email.match(EMAIL_REGEX)) {
+			this.MostarMensaje("Formato de mail inválido");
 			return;
 		}
-		else if (!this.usuario.email.match(EMAIL_REGEX)) {
-			this.MostarMensaje("Formato de mail inválido");
+
+		if (this.usuario.foto == "") {
+			this.MostarMensaje("Subir foto");
 			return;
 		}
 
@@ -135,9 +134,10 @@ export class AltaEmpleadoComponent implements OnInit {
 				"email": this.usuario.email,
 				"foto": this.usuario.foto,
 				"rol": this.usuario.rol,
-				"password": this.usuario.password,
-				"sexo": this.usuario.sexo
+				"sexo": this.usuario.sexo,
+				"cuil": this.usuario.cuil
 			};
+
 
 			console.log("Save /user");
 
@@ -248,13 +248,13 @@ export class AltaEmpleadoComponent implements OnInit {
 	presentSwal(){
 		Swal.fire(
 			{
-			title: 'Usuario Registrado!',
+			title: 'Empleado Registrado!',
 			text: 'Será redirigido al listado.',
 			icon: 'success',
 			}
 		  );
 
-		this.router.navigate(['/tabs/tab2']);
+		//this.router.navigate(['/tabs/tab2']);
 	}
 
 	sendEmail(){
@@ -264,6 +264,5 @@ export class AltaEmpleadoComponent implements OnInit {
 			message: "Gracias por usar nuestra app.",
 			reply_to: "user.email",
 			}, "user_eIfLVqa4g2wGEeak0ItF0");*/
-	}
-
+  }
 }

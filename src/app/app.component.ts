@@ -7,9 +7,7 @@ import {Roles} from './componentes/Roles/Roles'
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-
 export class AppComponent {
-  
   usuario = AuthServiceService.usuario;
   
 
@@ -18,16 +16,15 @@ export class AppComponent {
     { title: 'logIn', url: '/folder/Log In', icon: 'log-in', rol: ''},
     { title: 'Alta Empleado', url: '/folder/Alta Empleado', icon: 'construct', rol: Roles.Administrador},
     { title: 'Alta Empleado', url: '/folder/Alta Empleado', icon: 'construct', rol: Roles.Dueño},
+    { title: 'Alta Cliente', url: '/folder/Alta Cliente', icon: 'person-add', rol: ''},
     { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
     { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
     { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
     { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
     { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
-
   ];
 
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor() {}
-
 }

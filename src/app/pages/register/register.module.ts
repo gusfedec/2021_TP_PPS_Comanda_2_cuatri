@@ -7,8 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
-import { Router } from  "@angular/router";
-//import { AuthService } from '../auth.service;'
 
 @NgModule({
   imports: [
