@@ -1,3 +1,4 @@
+import { ListadoClientesPage } from './../pages/listado-clientes/listado-clientes.page';
 import { AltaMesaPage } from './../pages/alta-mesa/alta-mesa.page';
 import { SpinnerComponent } from './../componentes/spinner/spinner.component';
 import { ScannerDNIComponent } from './../componentes/scanner-dni/scanner-dni.component';
@@ -28,6 +29,6 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
     FolderPageRoutingModule,
     NgxQRCodeModule
   ],
-  declarations: [FolderPage, LoginPage, AltaEmpleadoComponent, AltaClientePage, CamaraDeFotosComponent, ScannerDNIComponent, SpinnerComponent, AltaMesaPage]
+  declarations: [FolderPage, LoginPage, AltaEmpleadoComponent, AltaClientePage, CamaraDeFotosComponent, ScannerDNIComponent, SpinnerComponent, AltaMesaPage, ListadoClientesPage]
 })
 export class FolderPageModule {}

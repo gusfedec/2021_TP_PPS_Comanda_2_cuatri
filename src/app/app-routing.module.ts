@@ -39,6 +39,10 @@ const routes: Routes = [
     path: 'alta-mesa',
     loadChildren: () => import('./pages/alta-mesa/alta-mesa.module').then( m => m.AltaMesaPageModule)
   },
+  {
+    path: 'listado-clientes',
+    loadChildren: () => import('./pages/listado-clientes/listado-clientes.module').then( m => m.ListadoClientesPageModule)
+  },
 
 
 ];

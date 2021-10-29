@@ -145,8 +145,19 @@ export class FirebaseAuth {
 
 	async saveExistingEntity(path, newObject, id) {
 		//console.log("saveExistingEntity");
-		var imageRef = await this.afs.collection(path).ref;
-		await imageRef.doc("/" + id).set(newObject).then(succ => { console.log("update completed"); });
+		return new Promise<any>((resolve, reject) => {
+
+			var imageRef = this.afs.collection(path).ref.doc("/" + id).set(newObject)
+			.then(
+				(res) => {
+					resolve(res)
+				},
+				err => reject(err)
+			)
+		});
+
+		//var imageRef = await this.afs.collection(path).ref;
+		//await imageRef.doc("/" + id).set(newObject).then(succ => { console.log("update completed"); });
 	}
 
 	bringEntity(path, returnObject) {
@@ -167,6 +178,31 @@ export class FirebaseAuth {
 				postData.id = doc.payload.doc['id'];
 				  
 				returnObject.push(postData);
+
+			});
+			return returnObject;
+		});
+	}
+
+	bringClientsUnapproved(path, returnObject) {
+		console.log("bringEntity");
+		//var returnObject = new Array(); 
+
+
+		var imageRef = this.afs.collection<any>(path);
+
+		imageRef.snapshotChanges().forEach(snapshot => {
+			var array = new Array();
+			returnObject.length = 0;
+			
+			var postData = snapshot.forEach(doc => {
+
+				var postData = doc.payload.doc.data();
+				console.log(doc.payload.doc['id'], " => ", postData);
+				postData.id = doc.payload.doc['id'];
+				if(postData.aprobado == null || postData.aprobado == undefined || postData.aprobado == ''){
+					returnObject.push(postData);
+				}
 
 			});
 			return returnObject;
