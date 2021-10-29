@@ -19,6 +19,7 @@ import { File } from '@ionic-native/file/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QrcodeComponent, NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 
 
@@ -36,7 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     File,
     PhotoLibrary,
     Camera,
-    SplashScreen
+    SplashScreen,
+    QrcodeComponent
   ],
   bootstrap: [AppComponent],
 })

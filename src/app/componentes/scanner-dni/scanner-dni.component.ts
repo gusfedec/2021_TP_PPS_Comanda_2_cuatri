@@ -39,5 +39,14 @@ export class ScannerDNIComponent implements OnInit {
 			console.log('Error', err);
 		});
   }
+
+  crearCodigo(){
+    //format: 'QR_CODE' | 'DATA_MATRIX' | 'UPC_E' | 'UPC_A' | 'EAN_8' | 'EAN_13' | 'CODE_128' | 'CODE_39' | 'CODE_93' | 'CODABAR' | 'ITF' | 'RSS14' | 'RSS_EXPANDED' | 'PDF_417' | 'AZTEC' | 'MSI';
+
+    this.barcodeScanner.encode("QR_CODE", "Tomas").then(barcodeData =>{
+      alert(barcodeData);
+    });
+
+  }
   
 }

@@ -1,3 +1,4 @@
+import { AltaMesaPage } from './../pages/alta-mesa/alta-mesa.page';
 import { SpinnerComponent } from './../componentes/spinner/spinner.component';
 import { ScannerDNIComponent } from './../componentes/scanner-dni/scanner-dni.component';
 import { CamaraDeFotosComponent } from './../componentes/camara-de-fotos/camara-de-fotos.component';
@@ -15,6 +16,7 @@ import { IonicModule } from '@ionic/angular';
 import { FolderPageRoutingModule } from './folder-routing.module';
 
 import { FolderPage } from './folder.page';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 
 
@@ -23,8 +25,9 @@ import { FolderPage } from './folder.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    FolderPageRoutingModule
+    FolderPageRoutingModule,
+    NgxQRCodeModule
   ],
-  declarations: [FolderPage, LoginPage, AltaEmpleadoComponent, AltaClientePage, CamaraDeFotosComponent, ScannerDNIComponent, SpinnerComponent]
+  declarations: [FolderPage, LoginPage, AltaEmpleadoComponent, AltaClientePage, CamaraDeFotosComponent, ScannerDNIComponent, SpinnerComponent, AltaMesaPage]
 })
 export class FolderPageModule {}
