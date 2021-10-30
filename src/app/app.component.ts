@@ -12,7 +12,15 @@ export class AppComponent {
 
   public appPages = [
     /*     { title: 'logIn', url: '/folder/Log In', icon: 'log-in', rol: '' },
-     */ {
+    
+     */ 
+    {
+      title: 'Principal',
+      url: '/folder/Home',
+      icon: 'home',
+      rol: ''
+    },
+    {
       title: 'Alta Empleado',
       url: '/folder/Alta Empleado',
       icon: 'construct',

@@ -13,6 +13,7 @@ export class ScannerDNIComponent implements OnInit {
 
   constructor(private barcodeScanner: BarcodeScanner) { }
 
+  @Input() format;
   @Output() datosUsuario = new EventEmitter();
 
   ngOnInit() {}
@@ -23,6 +24,7 @@ export class ScannerDNIComponent implements OnInit {
 		formats: "PDF_417" 
 	}; //PDF_417
 	escanear() {
+    this.barScanneroptions.formats = this.format;
 		this.barcodeScanner.scan(this.barScanneroptions).then(barcodeData => {
 			console.log('Barcode data', barcodeData);
       var auxBarCode = barcodeData.text.split('@');
