@@ -11,34 +11,40 @@ import { AngularFireModule } from '@angular/fire';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import firebaseConfig from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
-
-import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import {
+  BarcodeScanner,
+  BarcodeScannerOptions,
+} from '@ionic-native/barcode-scanner/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
-import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QrcodeComponent, NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
-
-
+import { LogOutComponent } from './componentes/log-out/log-out.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LogOutComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-  AngularFireModule.initializeApp(firebaseConfig.firebase),
-  AngularFireAuthModule,
-  AngularFireDatabaseModule,
-  BrowserAnimationsModule
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    AngularFireModule.initializeApp(firebaseConfig.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    BrowserAnimationsModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     BarcodeScanner,
     File,
     PhotoLibrary,
     Camera,
     SplashScreen,
-    QrcodeComponent
+    QrcodeComponent,
+    LogOutComponent,
   ],
   bootstrap: [AppComponent],
 })

@@ -1,13 +1,15 @@
 <ion-toolbar color="medium">
   <ion-buttons slot="start">
-      <ion-icon style="zoom:2.0;" name="log-out" (click)=logOut()></ion-icon>
-  </ion-buttons>     
-  
-  <ion-title *ngIf="user != null && user.length > 0">
-    Bienvenido {{user[0]}}
+    <ion-icon style="zoom:2.0;" name="person-circle-outline"></ion-icon>
+  </ion-buttons>
+
+  <ion-title>
+    Bienvenido {{user[0].nombre}}
   </ion-title>
 
-  <ion-title *ngIf="user == null || user.length == 0">
-    Ingrese al sistema
-  </ion-title>
 </ion-toolbar>
+<ion-item (click)=logOut();>
+  <ion-icon slot="start" name="log-out">
+  </ion-icon>
+  <ion-label>Cerrar Sesión</ion-label>
+</ion-item>
