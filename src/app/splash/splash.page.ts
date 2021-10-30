@@ -16,7 +16,7 @@ export class SplashPage {
     }, 10);
     setTimeout(() => {
       /* this.router.navigate(['tabs']);*/
-      this.router.navigate(['login'], { replaceUrl: true });
+      this.router.navigate(['/folder/Log In'], { replaceUrl: true });
     }, 3000);
   }
 }
