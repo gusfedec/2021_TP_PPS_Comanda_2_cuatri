@@ -63,7 +63,14 @@ export class AltaMesaPage implements OnInit {
 		//this.mesa.qr =
 		this.qrCodeCaller.generateBeautifulQrCode(this.mesa.qrValue).subscribe(
 			(data) => {
-				this.createImageFromBlob(data);
+				//this is SVG as plain text
+				const blob = new Blob([data], { type: "image/svg+xml" });
+				const url = URL.createObjectURL(blob);
+				console.log("data", data);
+				console.log("blob", blob.arrayBuffer());
+				console.log("url", url);
+
+				this.createImageFromBlob(blob);
 			},
 			(error) => {
 				this.spinner = false;
@@ -138,24 +145,28 @@ export class AltaMesaPage implements OnInit {
 	createImageFromBlob(image: Blob) {
 		let reader = new FileReader();
 		console.log("createImageFromBlob");
+
+//		this.imageToShow = reader.result;
+		console.log("imageToShow", this.imageToShow);
+
+		this.fireAuth.addImageAndReturnURL(image, this.mesa.qrValue).then(response =>{
+			console.log("addImageAndReturnURL", response);
+			this.mesa.qr = response;
+
+			this.fireAuth.saveNewEntity(FirebaseAuth.mesas, this.mesa).then(response => {
+				this.spinner = false;						
+				this.presentSwal();
+			});
+
+		});
+
+
 		reader.addEventListener(
 			"load",
 			() => {
 				console.log("addEventListener");
 
-				this.imageToShow = reader.result;
-				console.log(this.imageToShow);
-
-				this.fireAuth.addImageAndReturnURL(this.imageToShow, this.mesa.qrValue, false).then(response =>{
-					console.log(response);
-					this.mesa.qr = response;
-
-					this.fireAuth.saveNewEntity(FirebaseAuth.mesas, this.mesa).then(response => {
-						this.spinner = false;						
-						this.presentSwal();
-					});
-
-				});
+				//////
 
 				//download https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/pictures%2Fusers%2FMesa%20adssa?alt=media&token=fa8de282-ff33-41bc-834f-4fa83d45cb61
 

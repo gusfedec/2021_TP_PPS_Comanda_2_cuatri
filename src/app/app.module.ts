@@ -1,5 +1,5 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 
 import { QrCodeCallerService } from './services/qr-code-caller.service';
 import { NgModule } from '@angular/core';
@@ -40,7 +40,7 @@ import { LogOutComponent } from './componentes/log-out/log-out.component';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule    
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
