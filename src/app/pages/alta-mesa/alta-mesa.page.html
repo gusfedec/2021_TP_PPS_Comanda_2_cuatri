@@ -39,6 +39,11 @@
     errorCorrectionLevel="L">
 </ngx-qrcode>
 
+
+<img [src]="this.mesa.qr"
+     *ngIf="this.mesa.qr"
+     class="QrImage">
+
 	<div id="snackbar">{{Mensajes}}</div>
 
 </ion-content>

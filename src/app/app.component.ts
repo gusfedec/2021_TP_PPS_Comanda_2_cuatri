@@ -16,7 +16,7 @@ export class AppComponent {
      */ 
     {
       title: 'Principal',
-      url: '/folder/Home',
+      url: '/folder/Principal',
       icon: 'home',
       rol: ''
     },

@@ -42,6 +42,22 @@ export class ScannerDNIComponent implements OnInit {
 		});
   }
 
+
+  escanearQr(){
+    this.barScanneroptions.formats = this.format;
+    //this.datosUsuario.emit('Alta Cliente');
+
+    this.barcodeScanner.scan(this.barScanneroptions).then(barcodeData => {
+			console.log('Barcode data', barcodeData);
+      var auxBarCode = barcodeData.text;
+      
+      this.datosUsuario.emit(auxBarCode);
+
+		}).catch(err => {
+			console.log('Error', err);
+		});
+  }
+
   crearCodigo(){
     //format: 'QR_CODE' | 'DATA_MATRIX' | 'UPC_E' | 'UPC_A' | 'EAN_8' | 'EAN_13' | 'CODE_128' | 'CODE_39' | 'CODE_93' | 'CODABAR' | 'ITF' | 'RSS14' | 'RSS_EXPANDED' | 'PDF_417' | 'AZTEC' | 'MSI';
 
