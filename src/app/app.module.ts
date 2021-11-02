@@ -1,3 +1,7 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
+
+import { QrCodeCallerService } from './services/qr-code-caller.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -20,9 +24,11 @@ import {
 import { File } from '@ionic-native/file/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QrcodeComponent, NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { LogOutComponent } from './componentes/log-out/log-out.component';
+
 
 @NgModule({
   declarations: [AppComponent, LogOutComponent],
@@ -35,6 +41,7 @@ import { LogOutComponent } from './componentes/log-out/log-out.component';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
+    HttpClientModule    
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -45,6 +52,8 @@ import { LogOutComponent } from './componentes/log-out/log-out.component';
     SplashScreen,
     QrcodeComponent,
     LogOutComponent,
+    QrCodeCallerService,
+    HttpClient
   ],
   bootstrap: [AppComponent],
 })

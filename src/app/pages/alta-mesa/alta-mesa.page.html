@@ -27,7 +27,7 @@
 
   <ion-button color="medium" expand="full" (click)="registrar()"> Crear Mesa </ion-button>
 
-  <app-camara-de-fotos (linkFoto)="asignarFoto()"> </app-camara-de-fotos>
+  <app-camara-de-fotos (click)="Spinnear()"(linkFoto)="asignarFoto($event)"> </app-camara-de-fotos>
 
   <!-- *ngIf="createdCode" -->
   <!--qr-code [data]="createdCode"> </!--qr-code-->
@@ -39,6 +39,13 @@
     errorCorrectionLevel="L">
 </ngx-qrcode>
 
+
+<img [src]="this.mesa.qr"
+     *ngIf="this.mesa.qr"
+     class="QrImage">
+
 	<div id="snackbar">{{Mensajes}}</div>
+
+
 
 </ion-content>
