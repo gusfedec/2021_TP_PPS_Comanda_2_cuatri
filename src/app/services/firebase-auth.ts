@@ -91,7 +91,7 @@ export class FirebaseAuth {
 
 
 
-	async addImageAndReturnURL(value : Blob, relativePath, addBase64?) {
+	async addImageAndReturnURL(value, relativePath, addBase64?) {
 
 		console.log("value", value);
 		console.log("relativePath", relativePath);
@@ -99,10 +99,14 @@ export class FirebaseAuth {
 		const selfieRef = firebase.storage().ref(this.basePicturesPath + "users/" + relativePath);
 		console.log("selfieRef", selfieRef);
 
-		if(addBase64 == null || addBase64 == true)
+		if(addBase64 == false){
+			console.log("addBase64", addBase64);
+
 			await selfieRef.put(value);
-		/*else
-			await selfieRef.putString(value, 'data_url', { contentType: 'image/png' });*/
+		}
+		else{
+			await selfieRef.putString(value, 'base64', { contentType: 'image/png' });
+		}
 
 		var download = "";
 

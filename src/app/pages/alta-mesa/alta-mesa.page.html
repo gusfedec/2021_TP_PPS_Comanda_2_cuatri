@@ -27,7 +27,7 @@
 
   <ion-button color="medium" expand="full" (click)="registrar()"> Crear Mesa </ion-button>
 
-  <app-camara-de-fotos (linkFoto)="asignarFoto()"> </app-camara-de-fotos>
+  <app-camara-de-fotos (click)="Spinnear()"(linkFoto)="asignarFoto($event)"> </app-camara-de-fotos>
 
   <!-- *ngIf="createdCode" -->
   <!--qr-code [data]="createdCode"> </!--qr-code-->

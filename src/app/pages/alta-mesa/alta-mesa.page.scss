@@ -37,6 +37,12 @@
 	display: block; 
 	margin-left: auto; 
 	margin-right: auto;
+
+	min-width:50px; /* if load.gif have 50px width */
+    min-height:50px; /* if load.gif have 50px height */
+    background: url('../../../assets/spinner.gif') no-repeat;
+	//background: transparent url(path/to/loading.gif) no-repeat scroll center center;
+
 }
 
 

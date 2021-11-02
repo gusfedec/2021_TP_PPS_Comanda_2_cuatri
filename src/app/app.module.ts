@@ -24,6 +24,7 @@ import {
 import { File } from '@ionic-native/file/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QrcodeComponent, NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { LogOutComponent } from './componentes/log-out/log-out.component';

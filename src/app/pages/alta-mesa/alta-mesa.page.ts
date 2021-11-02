@@ -34,6 +34,7 @@ export class AltaMesaPage implements OnInit {
 	};
 
 	asignarFoto(url) {
+		console.log("AsignarFotoUrl", url)
 		this.mesa.foto = url;
 	}
 
@@ -44,6 +45,9 @@ export class AltaMesaPage implements OnInit {
 
 	generarQr(){
 
+	}
+	Spinnear(){
+		this.spinner = true;
 	}
 	
 	registrar() {
@@ -149,7 +153,7 @@ export class AltaMesaPage implements OnInit {
 //		this.imageToShow = reader.result;
 		console.log("imageToShow", this.imageToShow);
 
-		this.fireAuth.addImageAndReturnURL(image, this.mesa.qrValue).then(response =>{
+		this.fireAuth.addImageAndReturnURL(image, this.mesa.qrValue, false).then(response =>{
 			console.log("addImageAndReturnURL", response);
 			this.mesa.qr = response;
 
