@@ -27,7 +27,7 @@
   <ion-button color="medium" style="width: 48%" (click)="registrar('anonimo')"> Anonimo </ion-button>
   <ion-button color="medium" style="width: 48%" (click)="registrar('')"> Registrarse </ion-button>
 
-  <app-camara-de-fotos (linkFoto)="asignarFoto()"> </app-camara-de-fotos>
+  <app-camara-de-fotos (linkFoto)="asignarFoto($event)"> </app-camara-de-fotos>
   <app-scanner-dni class="clienteImage" (datosUsuario)="datosDeScanner()" [format]="'PDF_417'"></app-scanner-dni>
 
 	<div id="snackbar">{{Mensajes}}</div>
