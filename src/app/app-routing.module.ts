@@ -35,7 +35,8 @@ const routes: Routes = [
   {
     path: 'alta-cliente',
     loadChildren: () => import('./pages/alta-cliente/alta-cliente.module').then( m => m.AltaClientePageModule)
-  },  {
+  },
+  {
     path: 'alta-mesa',
     loadChildren: () => import('./pages/alta-mesa/alta-mesa.module').then( m => m.AltaMesaPageModule)
   },
@@ -46,6 +47,13 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'alta-producto',
+    loadChildren: () =>
+      import('./pages/alta-producto/alta-producto.module').then(
+        (m) => m.AltaProductoPageModule
+      ),
   },
 
 

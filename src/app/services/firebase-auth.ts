@@ -53,6 +53,7 @@ export class FirebaseAuth {
 	static users = "/users";
 	static clientes = "/clientes";
 	static mesas = "/mesas";
+	static productos = "/productos";
 
 
 	async login(user) {

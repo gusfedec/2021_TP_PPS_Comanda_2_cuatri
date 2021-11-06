@@ -1,0 +1,52 @@
+<ion-content>
+
+
+  <br>
+
+
+
+  <app-spinner [shouldISpin]=spinner></app-spinner>
+
+  <!-- Input with placeholder -->
+  <ion-item>
+    <ion-label>Nombre del producto</ion-label>
+    <ion-input placeholder="Nombre" [(ngModel)]='producto.nombre'></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Descripcion</ion-label>
+    <ion-input placeholder="Descripcion" [(ngModel)]='producto.descripcion'></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Valoracion</ion-label>
+
+    <ion-icon slot="end" color="primary" *ngFor="let estrella of estrellas;let i = index"
+      [name]="valor <= i? 'star-outline' :'star' " (click)="review(i)">
+    </ion-icon>
+
+  </ion-item>
+
+  <!--   <img *ngIf="producto.fotos.length == 0" class="clienteImage"
+    src='https://www.nicepng.com/png/detail/185-1859053_dinner-png-download-people-sitting-at-table-png.png'> -->
+
+  <div *ngIf="producto.fotos.length > 0" class="imagenes">
+    <img class="clienteImage" *ngFor="let foto of producto.fotos" src="{{foto}}">
+  </div>
+
+  <app-camara-de-fotos (click)="Spinnear()" *ngIf="producto.fotos.length < 3" (linkFoto)="asignarFoto($event)"> </app-camara-de-fotos>
+
+  <ngx-qrcode class="QrImage" *ngIf="value != ''" [elementType]="elementType" [value]="value" cssClass="aclass"
+    errorCorrectionLevel="L">
+  </ngx-qrcode>
+
+  <ion-button color="medium" expand="full" (click)="registrar()"> Crear producto </ion-button>
+
+  <img [src]="this.producto.qr"
+     *ngIf="this.producto.qr"
+     class="QrImage">
+
+
+  <div id="snackbar">{{Mensajes}}</div>
+
+</ion-content>

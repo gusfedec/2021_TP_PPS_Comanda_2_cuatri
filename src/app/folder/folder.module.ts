@@ -7,7 +7,8 @@ import { CamaraDeFotosComponent } from './../componentes/camara-de-fotos/camara-
 import { AltaEmpleadoComponent } from './../componentes/alta-empleado/alta-empleado.component';
 import { LoginPage } from '../pages/login/login.page';
 
-import { AltaClientePage  } from '../pages/alta-cliente/alta-cliente.page';
+import { AltaClientePage } from '../pages/alta-cliente/alta-cliente.page';
+import { AltaProductoPage } from '../pages/alta-producto/alta-producto.page';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,16 +21,26 @@ import { FolderPageRoutingModule } from './folder-routing.module';
 import { FolderPage } from './folder.page';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
-
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     FolderPageRoutingModule,
-    NgxQRCodeModule
+    NgxQRCodeModule,
   ],
-  declarations: [FolderPage, LoginPage, AltaEmpleadoComponent, AltaClientePage, CamaraDeFotosComponent, ScannerDNIComponent, SpinnerComponent, AltaMesaPage, ListadoClientesPage, HomePage]
+  declarations: [
+    FolderPage,
+    LoginPage,
+    AltaEmpleadoComponent,
+    AltaClientePage,
+    CamaraDeFotosComponent,
+    ScannerDNIComponent,
+    SpinnerComponent,
+    AltaMesaPage,
+    ListadoClientesPage,
+    AltaProductoPage,
+    HomePage,
+  ],
 })
 export class FolderPageModule {}
