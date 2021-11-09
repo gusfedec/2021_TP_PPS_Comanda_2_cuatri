@@ -1,22 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FirebaseAuth } from '../../services/firebase-auth';
 import Swal from 'sweetalert2';
-import {MailService} from '../../services/mail.service';
-
 @Component({
-  selector: 'app-listado-clientes',
-  templateUrl: './listado-clientes.page.html',
-  styleUrls: ['./listado-clientes.page.scss'],
+  selector: 'app-lista-espera-mesa',
+  templateUrl: './lista-espera-mesa.page.html',
+  styleUrls: ['./lista-espera-mesa.page.scss'],
 })
-export class ListadoClientesPage implements OnInit {
+export class ListaEsperaMesaPage implements OnInit {
 
-  constructor(public fireAuth: FirebaseAuth, private email: MailService) {}
+  constructor(public fireAuth: FirebaseAuth) {}
 
   clientes =[];
   spinner = true;
 
   ngOnInit(): void {
-    this.fireAuth.bringClientsUnapproved(FirebaseAuth.clientes, this.clientes);
+    this.fireAuth.bringEntityWithFilterKeyValue(FirebaseAuth.users, "waitingForTable", "true", this.clientes);
     var counter = 0;
     let intervalId = setInterval(() => {
       this.spinner = false;
@@ -24,11 +22,17 @@ export class ListadoClientesPage implements OnInit {
 
   }
 
+  ngAfterViewInit()	{
+    console.log("Lista de Espera ngAfterViewInit");
+  }
+
+
+  @Input() sourceType;
+	@Output() linkFoto = new EventEmitter();
 
   aceptar(cliente){
     cliente.aprobado = true;
     this.fireAuth.saveExistingEntity(FirebaseAuth.clientes, cliente, cliente.id).then(result => {
-      this.email.enviarEmail("registro_aprobado", cliente.mail, cliente.nombre);
       this.presentSwal('aprobado');
     });
 
@@ -37,7 +41,6 @@ export class ListadoClientesPage implements OnInit {
   denegar(cliente){
     cliente.aprobado = false;
     this.fireAuth.saveExistingEntity(FirebaseAuth.clientes, cliente, cliente.id).then(result => {
-      this.email.enviarEmail("registro_rechazado", cliente.mail, cliente.nombre);
       this.presentSwal('denegado');
     });  
   }
@@ -54,4 +57,5 @@ export class ListadoClientesPage implements OnInit {
 
 		//this.router.navigate(['/tabs/tab2']);
 	}
+
 }

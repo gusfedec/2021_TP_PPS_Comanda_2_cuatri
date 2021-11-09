@@ -54,7 +54,11 @@ const routes: Routes = [
       import('./pages/alta-producto/alta-producto.module').then(
         (m) => m.AltaProductoPageModule
       ),
+  },  {
+    path: 'lista-espera-mesa',
+    loadChildren: () => import('./pages/lista-espera-mesa/lista-espera-mesa.module').then( m => m.ListaEsperaMesaPageModule)
   },
+
 
 
 ];

@@ -16,6 +16,7 @@
   <app-listado-clientes *ngIf="folder == 'Listado Cliente'"></app-listado-clientes>
   <app-home *ngIf="folder == 'Principal'" (redirectTo)="redirectedFromHome($event)"></app-home>
   <app-alta-producto *ngIf="folder == 'Alta Producto'"></app-alta-producto>
+  <app-lista-espera-mesa *ngIf="folder == 'Lista de Espera'"></app-lista-espera-mesa>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">{{ folder }}</ion-title>

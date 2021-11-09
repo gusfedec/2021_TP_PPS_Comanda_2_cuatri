@@ -78,6 +78,13 @@ export class AppComponent {
       icon: 'fast-food',
       rol: Roles.Cocinero,
     },
+    {
+      title: 'Lista de Espera',
+      url: '/folder/Lista de Espera',
+      icon: '',
+      rol: Roles.Administrador,
+      img: 'https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/waiting-list.png?alt=media&token=cd09d437-c465-46fe-a527-04cc20e8ceda'
+    },
     { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
     { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
     { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
