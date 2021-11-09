@@ -1,3 +1,4 @@
+import { Roles } from './../../componentes/Roles/Roles';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseAuth } from '../../services/firebase-auth';
 import { Router } from '@angular/router';
@@ -15,16 +16,26 @@ export class LoginPage implements OnInit {
 
   public mail;
   users = [];
+  
   ngOnInit() {
     this.mail = 'admin@gmail.com';
     this.loggingIn = false;
     this.fireAuth.bringEntity('/users', this.users);
   }
+
   loggingIn = false;
   logIn(event) {
     console.info(this.user);
     localStorage.setItem('email', this.mail);
     this.loggingIn = true;
+
+    if(this.selectedUser != null && this.selectedUser.rol == Roles.Cliente)
+    {
+      if(this.selectedUser.aprobado == undefined || this.selectedUser.aprobado == false){
+          this.MostarMensaje("Cliente no aprobado.")
+          return;
+      }
+    }
     var user = { email: this.mail, password: '123456' };
     this.fireAuth
       .login(user)
@@ -66,9 +77,28 @@ export class LoginPage implements OnInit {
     this.user.email = event;
   }
 
+  selectedUser;
   clieckOnLogInUser(userInput) {
     console.log(userInput);
     this.mail = userInput.mail;
     this.user = userInput;
+    this.selectedUser = userInput;
+
   }
+
+  Mensajes;
+  MostarMensaje(mensaje: string = "este es el mensaje", ganador: boolean = false) {
+		this.Mensajes = mensaje;
+		var x = document.getElementById("snackbar");
+		if (ganador) {
+			x.className = "show Ganador";
+		} else {
+			x.className = "show Perdedor";
+		}
+		var modelo = this;
+		setTimeout(function () {
+			x.className = x.className.replace("show", "");
+		}, 3000);
+		console.info("objeto", x);
+	}
 }

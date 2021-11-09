@@ -54,6 +54,7 @@ export class FirebaseAuth {
 	static clientes = "/clientes";
 	static mesas = "/mesas";
 	static productos = "/productos";
+	static listDeEsperaMesa = "/listDeEsperaMesa";
 
 
 	async login(user) {
@@ -214,6 +215,34 @@ export class FirebaseAuth {
 				console.log(doc.payload.doc['id'], " => ", postData);
 				postData.id = doc.payload.doc['id'];
 				if(postData.aprobado == null || postData.aprobado == undefined || postData.aprobado == ''){
+					returnObject.push(postData);
+				}
+
+			});
+			return returnObject;
+		});
+	}
+
+
+	bringEntityWithFilterKeyValue(path, key, value, returnObject) {
+		console.log("bringEntity");
+		//var returnObject = new Array(); 
+
+
+		var imageRef = this.afs.collection<any>(path);
+
+		imageRef.snapshotChanges().forEach(snapshot => {
+			var array = new Array();
+			returnObject.length = 0;
+			
+			var postData = snapshot.forEach(doc => {
+
+
+				var postData = doc.payload.doc.data();
+				console.log(doc.payload.doc['id'], " => ", postData);
+				postData.id = doc.payload.doc['id'];
+	
+				if(postData[key] != null && postData[key] != undefined && postData[key] == value ){
 					returnObject.push(postData);
 				}
 

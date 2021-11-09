@@ -6,7 +6,7 @@ import { ScannerDNIComponent } from './../componentes/scanner-dni/scanner-dni.co
 import { CamaraDeFotosComponent } from './../componentes/camara-de-fotos/camara-de-fotos.component';
 import { AltaEmpleadoComponent } from './../componentes/alta-empleado/alta-empleado.component';
 import { LoginPage } from '../pages/login/login.page';
-
+import { ListaEsperaMesaPage } from '../pages/lista-espera-mesa/lista-espera-mesa.page';
 import { AltaClientePage } from '../pages/alta-cliente/alta-cliente.page';
 import { AltaProductoPage } from '../pages/alta-producto/alta-producto.page';
 
@@ -41,6 +41,7 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
     ListadoClientesPage,
     AltaProductoPage,
     HomePage,
+    ListaEsperaMesaPage
   ],
 })
 export class FolderPageModule {}
