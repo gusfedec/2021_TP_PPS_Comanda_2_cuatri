@@ -1,3 +1,8 @@
 <ion-content>
+  <ion-button (click)="redirect('Mesa 10')"> Boton de testeo QR</ion-button>
   <app-scanner-dni class="clienteImage" (datosUsuario)="redirect($event)" [format]="'QR_CODE'"></app-scanner-dni>
+
+
+  <div id="snackbar">{{Mensajes}}</div>
+
 </ion-content>

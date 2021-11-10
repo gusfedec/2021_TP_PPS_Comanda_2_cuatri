@@ -47,7 +47,7 @@ export class AppComponent {
       img: 'https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/1019203.png?alt=media&token=1175dadb-4282-497a-9ae8-9fc65a70a900',
     },
     {
-      title: 'Alta Cliente',
+      title: 'Registrarse',
       url: '/folder/Alta Cliente',
       icon: 'person-add',
       rol: '',

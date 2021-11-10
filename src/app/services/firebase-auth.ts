@@ -20,6 +20,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
+import { Observable } from "rxjs";
 
 //import {AngularFirestore} from 'angularfire2/firestore';
 //import { auth } from 'firebase/app';
@@ -54,7 +55,7 @@ export class FirebaseAuth {
 	static clientes = "/clientes";
 	static mesas = "/mesas";
 	static productos = "/productos";
-	static listDeEsperaMesa = "/listDeEsperaMesa";
+
 
 
 	async login(user) {
@@ -249,6 +250,31 @@ export class FirebaseAuth {
 			});
 			return returnObject;
 		});
+	}
+
+	async getEntityOneTime(path, key, value) {
+		var bigTable;
+		await this.afs.collection<any>(path).get().forEach(element => {
+			console.log("element", element);
+			console.log("element docs", element.docs);
+
+			element.docs.forEach(doc =>{
+				console.log(doc["id"]);
+				console.log("data", doc.data());
+				var table = doc.data();
+				table.id = doc["id"];
+			
+				if(table[key] != null && table[key] != undefined && table[key] == value){
+					bigTable = table;
+					return table;
+				}
+
+			});
+			console.log("element metadata", element.metadata);
+			
+		});
+
+		return bigTable;
 	}
 
 	bringEntityWithFilterString2(path, turnos, filterWord){

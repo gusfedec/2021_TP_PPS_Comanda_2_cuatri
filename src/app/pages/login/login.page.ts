@@ -33,6 +33,7 @@ export class LoginPage implements OnInit {
     {
       if(this.selectedUser.aprobado == undefined || this.selectedUser.aprobado == false){
           this.MostarMensaje("Cliente no aprobado.")
+          this.loggingIn = false;
           return;
       }
     }

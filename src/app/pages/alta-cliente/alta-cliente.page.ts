@@ -20,7 +20,8 @@ export class AltaClientePage implements OnInit {
     dni: "",
     foto: "https://static8.depositphotos.com/1003938/910/v/600/depositphotos_9108382-stock-illustration-funny-cartoon-office-worker.jpg",
     mail:"",
-    rol: Roles.Cliente
+    rol: Roles.Cliente,
+    aprobado: false
   };
   
   pass1;
@@ -48,9 +49,11 @@ export class AltaClientePage implements OnInit {
     var isDataGood = true;
     if(this.tipoDeLogin == 'anon'){
       isDataGood = this.validarAnon();
+      this.usuario.aprobado = true;
     }
     else{
       isDataGood = this.validarCompleto()
+      this.usuario.aprobado = false;
     }
 
     if(!isDataGood){
