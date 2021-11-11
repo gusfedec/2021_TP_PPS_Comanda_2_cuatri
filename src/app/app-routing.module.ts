@@ -58,6 +58,10 @@ const routes: Routes = [
     path: 'lista-espera-mesa',
     loadChildren: () => import('./pages/lista-espera-mesa/lista-espera-mesa.module').then( m => m.ListaEsperaMesaPageModule)
   },
+  {
+    path: 'menu',
+    loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
+  },
 
 
 

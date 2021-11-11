@@ -9,7 +9,7 @@ import { LoginPage } from '../pages/login/login.page';
 import { ListaEsperaMesaPage } from '../pages/lista-espera-mesa/lista-espera-mesa.page';
 import { AltaClientePage } from '../pages/alta-cliente/alta-cliente.page';
 import { AltaProductoPage } from '../pages/alta-producto/alta-producto.page';
-
+import { MenuPage } from '../pages/menu/menu.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -41,7 +41,8 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
     ListadoClientesPage,
     AltaProductoPage,
     HomePage,
-    ListaEsperaMesaPage
+    ListaEsperaMesaPage,
+    MenuPage
   ],
 })
 export class FolderPageModule {}

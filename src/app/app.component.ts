@@ -89,6 +89,13 @@ export class AppComponent {
     { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
     { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
     { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+    {
+      title: 'Menú',url: '/folder/Menú', icon: '', rol: Roles.Cliente, img: 'https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/coloredMenu.png?alt=media&token=f390f2e6-24bb-4c38-8b80-46c558a29d52'
+    },
+    {
+      title: 'Chat',url: '/folder/Chat', icon: '', rol: Roles.Cliente, img: 'https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/chatMozo.png?alt=media&token=57061520-1b47-468b-bdef-c123688ba38b'
+    },
+    
   ];
 
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];

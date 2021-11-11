@@ -55,6 +55,7 @@ export class FirebaseAuth {
 	static clientes = "/clientes";
 	static mesas = "/mesas";
 	static productos = "/productos";
+	static orders = "/orders";
 
 
 
