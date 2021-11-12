@@ -136,7 +136,7 @@ export class AltaEmpleadoPage implements OnInit {
 				"nombre": this.usuario.nombre,
 				"apellido": this.usuario.apellido,
 				"dni": this.usuario.dni,
-				"email": this.usuario.email,
+				"mail": this.usuario.email,
 				"foto": this.usuario.foto,
 				"rol": this.usuario.rol,
 				"sexo": this.usuario.sexo,

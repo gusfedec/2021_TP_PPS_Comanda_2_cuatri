@@ -97,6 +97,15 @@ export class AppComponent {
     },
     {
       title: 'Order',url: '/folder/Order', icon: '', rol: Roles.Mozo, img: 'https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/4057741.png?alt=media&token=0537f82c-9b42-4b42-98b3-34e0baf546a2'
+    },
+    {
+      title: 'Order',url: '/folder/Order', icon: '', rol: Roles.Bartender, img: 'https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/4057741.png?alt=media&token=0537f82c-9b42-4b42-98b3-34e0baf546a2'
+    },
+    {
+      title: 'Order',url: '/folder/Order', icon: '', rol: Roles.Cocinero, img: 'https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/4057741.png?alt=media&token=0537f82c-9b42-4b42-98b3-34e0baf546a2'
+    },
+    {
+      title: 'Order',url: '/folder/Order', icon: '', rol: Roles.Cliente, img: 'https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/4057741.png?alt=media&token=0537f82c-9b42-4b42-98b3-34e0baf546a2'
     }
     
   ];

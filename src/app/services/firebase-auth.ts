@@ -275,8 +275,6 @@ export class FirebaseAuth {
 					returnObject.push(postData);
 				}
 				console.log("Objeto a devolver", returnObject);
-				console.log("Objeto a devolver [0]", returnObject[0]);
-				console.log(".chat", returnObject[0].chat);
 
 			});
 			return returnObject;
