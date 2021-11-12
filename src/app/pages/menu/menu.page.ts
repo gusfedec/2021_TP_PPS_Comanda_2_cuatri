@@ -1,3 +1,4 @@
+import { OrderStatus } from './../../componentes/OrderStatus/OrderStatus';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FirebaseAuth } from "../../services/firebase-auth";
 import { AuthServiceService } from '../../services/auth-service.service';
@@ -26,7 +27,10 @@ export class MenuPage implements OnInit {
 			product.quantity = 0;
 		
 		this.totalPrice += Number(product.price);
-		this.totalTime += Number(product.tiempo);
+
+		if(product.tiempo != undefined)
+			this.totalTime += Number(product.tiempo);
+
 		product.quantity += 1;
 	}
 
@@ -62,7 +66,8 @@ export class MenuPage implements OnInit {
 			var order = {
 				products: productsInOrder,
 				table: '',
-				price: this.totalPrice
+				price: this.totalPrice,
+				status: OrderStatus.Nuevo
 			};
 			
 			this.mesas.forEach(mesa =>{

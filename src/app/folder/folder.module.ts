@@ -1,3 +1,4 @@
+import { ListaOrdersPage } from './../pages/lista-orders/lista-orders.page';
 import { HomePage } from './../pages/home/home.page';
 import { ListadoClientesPage } from './../pages/listado-clientes/listado-clientes.page';
 import { AltaMesaPage } from './../pages/alta-mesa/alta-mesa.page';
@@ -45,7 +46,8 @@ import { FechaPipe } from '../pipes/fecha.pipe';
     ListaEsperaMesaPage,
     MenuPage,
     ChatPage,
-    FechaPipe
+    FechaPipe,
+    ListaOrdersPage
   ],
 })
 export class FolderPageModule {}
