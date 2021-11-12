@@ -227,9 +227,9 @@ export class FirebaseAuth {
 
 
 	bringEntityWithFilterKeyValue(path, key, value, returnObject) {
-		console.log("bringEntity");
-		//var returnObject = new Array(); 
-
+		console.log("bringEntityWithFilterKeyValue");
+		console.log("key", key);
+		console.log("value", value);
 
 		var imageRef = this.afs.collection<any>(path);
 
@@ -243,10 +243,40 @@ export class FirebaseAuth {
 				var postData = doc.payload.doc.data();
 				console.log(doc.payload.doc['id'], " => ", postData);
 				postData.id = doc.payload.doc['id'];
-	
-				if(postData[key] != null && postData[key] != undefined && postData[key] == value ){
+				
+				console.log("KEY", key);
+				console.log(key.includes('.'));
+
+				if(key.includes('.')){
+					var keysArray = key.split('.');
+					var leng = keysArray.length;
+					var i = 1;
+					var finalElement = postData;
+					keysArray.forEach(element => {
+						try{
+							console.log("element", element);
+							console.log(finalElement);
+
+							if(finalElement != null)
+								finalElement = finalElement[element];
+
+							if(leng == i){
+								if(finalElement != null && finalElement != undefined && finalElement == value)
+									returnObject.push(postData);
+							}
+							i++;
+						}
+						catch(error){
+							console.log("ERROR", error);
+						}
+					});
+				}
+				else if(postData[key] != null && postData[key] != undefined && postData[key] == value ){
 					returnObject.push(postData);
 				}
+				console.log("Objeto a devolver", returnObject);
+				console.log("Objeto a devolver [0]", returnObject[0]);
+				console.log(".chat", returnObject[0].chat);
 
 			});
 			return returnObject;
@@ -311,6 +341,23 @@ export class FirebaseAuth {
 	saveNewEntity(path, value){
 		return new Promise<any>((resolve, reject) => {
 			this.afs.collection(path).add(value)
+				.then(
+					(res) => {
+						resolve(res)
+					},
+					err => reject(err)
+				)
+		})
+	}
+
+	
+	addChat(path, value, mail) {
+		return new Promise<any>((resolve, reject) => {
+			this.afs.collection(path).add({
+				message: value,
+				email: mail,
+				time: new Date()
+			})
 				.then(
 					(res) => {
 						resolve(res)

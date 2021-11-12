@@ -206,6 +206,17 @@
 
 }
 
+
+.always-time{
+	position: fixed;
+	bottom: 50px;
+	left: 40%;
+	z-index: 999;
+	cursor: pointer;
+	color: #5c0000;
+	font-size: 20px;
+}
+
 .box-colored{
 	color: #5c0000;
 }

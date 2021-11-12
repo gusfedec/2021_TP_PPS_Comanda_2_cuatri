@@ -28,6 +28,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QrcodeComponent, NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { LogOutComponent } from './componentes/log-out/log-out.component';
+import { FechaPipe } from './pipes/fecha.pipe';
 
 
 @NgModule({

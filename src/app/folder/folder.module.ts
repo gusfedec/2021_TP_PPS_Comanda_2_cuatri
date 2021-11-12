@@ -13,13 +13,14 @@ import { MenuPage } from '../pages/menu/menu.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { ChatPage } from '../pages/chat/chat.page';
 import { IonicModule } from '@ionic/angular';
 
 import { FolderPageRoutingModule } from './folder-routing.module';
 
 import { FolderPage } from './folder.page';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { FechaPipe } from '../pipes/fecha.pipe';
 
 @NgModule({
   imports: [
@@ -42,7 +43,9 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
     AltaProductoPage,
     HomePage,
     ListaEsperaMesaPage,
-    MenuPage
+    MenuPage,
+    ChatPage,
+    FechaPipe
   ],
 })
 export class FolderPageModule {}
