@@ -14,7 +14,7 @@ export class ListaEsperaMesaPage implements OnInit {
   spinner = true;
 
   ngOnInit(): void {
-    this.fireAuth.bringEntityWithFilterKeyValue(FirebaseAuth.users, "waitingForTable", "true", this.clientes);
+    this.fireAuth.bringEntityWithFilterKeyValue(FirebaseAuth.users, "waitingForTable", true, this.clientes);
     var counter = 0;
     let intervalId = setInterval(() => {
       this.spinner = false;

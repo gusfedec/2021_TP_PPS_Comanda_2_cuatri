@@ -17,7 +17,7 @@ export class GamePollPayPage implements OnInit {
 
 
   selectTipo(toPage){
-    this.redirectTo.emit("toPage");
+    this.redirectTo.emit(toPage);
   }
 
 }

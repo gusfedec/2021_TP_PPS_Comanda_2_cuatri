@@ -1,7 +1,9 @@
 import { Roles } from './../../componentes/Roles/Roles';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FirebaseAuth } from '../../services/firebase-auth';
 import Swal from 'sweetalert2';
+import { AuthServiceService } from '../../services/auth-service.service';
+
 
 @Component({
   selector: 'app-alta-cliente',
@@ -14,6 +16,8 @@ export class AltaClientePage implements OnInit {
 
   Mensajes;
 
+  usuarioLoggeado = AuthServiceService.usuario;
+  @Output() redirect = new EventEmitter();
 
   usuario = {
     nombre:"",
@@ -25,8 +29,8 @@ export class AltaClientePage implements OnInit {
     aprobado: false
   };
   
-  pass1;
-  pass2;
+  pass1 = '';
+  pass2 = '';
   tipoDeLogin = '';
 
 
@@ -42,7 +46,9 @@ export class AltaClientePage implements OnInit {
   }
 
   datosDeScanner(user){
-    this.usuario = user;
+	this.usuario.nombre = user.nombre;
+	this.usuario.apellido = user.apellido;
+	this.usuario.dni = user.dni;
   }
   
   spinner;
@@ -70,16 +76,24 @@ export class AltaClientePage implements OnInit {
       };
 
       await this.fireAuth.signIn(user);
-    }
+    }else{
+		this.usuario.mail="anonimo@gmail.com";
+		AuthServiceService.usuario.length=0;
+		AuthServiceService.usuario.push(this.usuario);
+	}
+
 
 
     this.fireAuth.saveNewEntity(FirebaseAuth.users, this.usuario).then(response => {
       	this.spinner = false;
 
-      	if(this.tipoDeLogin != 'anon')
-       		this.presentSwal("Cliente Creado, a la espera de aprobación.")
-		else
-			this.presentSwal("Cliente Creado, disfrute su estadía.")
+      	if(this.tipoDeLogin != 'anon'){
+       		this.presentSwal("Cliente Creado, a la espera de aprobación.");
+			this.redirect.emit("Log In");
+		  }
+	    else{
+		  this.presentSwal("Cliente Creado, disfrute su estadía.");
+    	}
     });
 
   }
@@ -91,27 +105,27 @@ export class AltaClientePage implements OnInit {
       this.MostarMensaje("Completar Apellido.");
       return false;
     }
-    else if(this.usuario.dni == ''){
+    if(this.usuario.dni == ''){
       this.MostarMensaje("Completar DNI.");
       return false;
     }
-    else if(this.usuario.mail == ''){
+    if(this.usuario.mail == ''){
       this.MostarMensaje("Completar E-mail.");
       return false;
     }
-    else if (!this.usuario.mail.match(EMAIL_REGEX)) {
+    if (!this.usuario.mail.match(EMAIL_REGEX)) {
 			this.MostarMensaje("Formato de mail inválido.");
 			return false;
 		}
-    else if(this.pass1 == ''){
+    if(this.pass1 == '' || this.pass1 == undefined){
       this.MostarMensaje("Completar Contraseña.");
 			return false;
     }
-    else if(this.pass2 == ''){
+    if(this.pass2 == ''){
       this.MostarMensaje("Repetir Contraseña.");
 			return false;
     }
-    else if(this.pass2 != this.pass1){
+    if(this.pass2 != this.pass1){
       this.MostarMensaje("Las contraseñas deben coincidir.");
 			return false;
     }
@@ -154,7 +168,7 @@ export class AltaClientePage implements OnInit {
     this.spinner = false;
 		Swal.fire(
 			{
-			title: 'Pedido Actualizado!',
+			title: 'Cliente creado!',
 			text: stringWord,
 			icon: 'success',
 			}

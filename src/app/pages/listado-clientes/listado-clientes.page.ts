@@ -16,7 +16,7 @@ export class ListadoClientesPage implements OnInit {
   spinner = true;
 
   ngOnInit(): void {
-    this.fireAuth.bringEntityWithFilterKeyValue(FirebaseAuth.users,"rol", "Cliente" ,this.clientes);
+    this.fireAuth.bringClientsUnapproved(FirebaseAuth.users, this.clientes);
     var counter = 0;
     let intervalId = setInterval(() => {
       this.spinner = false;

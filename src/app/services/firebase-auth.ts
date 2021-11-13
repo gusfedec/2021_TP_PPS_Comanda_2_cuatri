@@ -216,7 +216,8 @@ export class FirebaseAuth {
 				var postData = doc.payload.doc.data();
 				console.log(doc.payload.doc['id'], " => ", postData);
 				postData.id = doc.payload.doc['id'];
-				if(postData.aprobado == null || postData.aprobado == undefined || postData.aprobado == ''){
+
+				if((postData.aprobado == null || postData.aprobado == undefined || postData.aprobado == '') && postData.rol == 'Cliente'){
 					returnObject.push(postData);
 				}
 

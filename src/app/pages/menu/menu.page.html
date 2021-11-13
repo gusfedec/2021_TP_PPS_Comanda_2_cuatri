@@ -1,4 +1,5 @@
 <ion-content>
+	<app-spinner [shouldISpin]="spinner"></app-spinner>
 
   <div class="shopping-cart">
     <!-- Title -->
@@ -72,7 +73,7 @@
         </button>
       </div>
    
-      <div class="total-price">${{product.precio}}</div>
+      <div class="total-price">${{product.price}}</div>
     </div>
 
     <div class="box-colored">

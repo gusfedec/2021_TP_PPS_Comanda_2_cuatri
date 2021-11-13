@@ -2,6 +2,7 @@ import { AuthServiceService } from './../../services/auth-service.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { of } from 'rxjs';
 import { FirebaseAuth } from '../../services/firebase-auth';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -23,17 +24,22 @@ export class HomePage implements OnInit {
   }
 
   mesas = [];
+  spinner =false;
 
   async redirect(event){
+    this.spinner = true;
+
     var user = AuthServiceService.usuario[0];
 
     if(event == 'Lista de Espera'){
-      //se pone al cliente en Lista de Espera a mesa.  
+      //se pone al cliente en Lista de Espera a mesa.
       user.waitingForTable = true;
       
 
       this.fireAuth.saveExistingEntity(FirebaseAuth.users, user, user.id).then(resp=>{
         AuthServiceService.usuario[0] = user;
+        this.spinner = false;
+        this.presentSwal("Usted fue agregado a la lista de Espera.");
       });
     }
     
@@ -43,16 +49,23 @@ export class HomePage implements OnInit {
       console.log('Inside');
       //se pone al cliente en Lista de Espera a mesa. 
       try{
-		var table = await this.fireAuth.getEntityOneTime(FirebaseAuth.mesas, "qrValue", event);
-		if(this.isThisYourTable(table)){
-			this.redirectTo.emit("Asignado");
-		}
-		else{
-        	this.asignarClienteAMesa(user, table); 
-		}
+			var table = await this.fireAuth.getEntityOneTime(FirebaseAuth.mesas, "qrValue", event);
+			if(this.isThisYourTable(table)){
+				this.redirectTo.emit("Asignado");
+			}
+			else{
+				this.asignarClienteAMesa(user, table).then(good=>{
+          this.redirectTo.emit("Asignado");
+          this.spinner = false;
+        }).catch(error =>{
+          this.presentSwalError(error.message);
+          this.spinner = false;
+        });
+				
+			}
       }
       catch(error){
-        this.MostarMensaje(error.message);
+        this.presentSwalError(error.message);
         return;
       }
     }
@@ -89,6 +102,8 @@ export class HomePage implements OnInit {
       throw new Error("Esta mesa ya esta siendo usada por el cliente " + table.assignedTo.nombre  );
     }
 
+      user.waitingForTable = false;
+      this.fireAuth.saveExistingEntity(FirebaseAuth.users, user, user.id);
       this.fireAuth.saveExistingEntity(FirebaseAuth.mesas, table, table.id);
       console.log("table", table);
   }
@@ -97,7 +112,7 @@ export class HomePage implements OnInit {
     var userHasTable = false;
     this.mesas.forEach(mesa => {
         if(!userHasTable)
-        	if(mesa.assignedTo != null && mesa.assignedTo != undefined && mesa.assignedTo.nombre == AuthServiceService.usuario[0].nombre)
+        	if(mesa.assignedTo != null && mesa.assignedTo != undefined && mesa.assignedTo != '' && mesa.assignedTo.nombre == AuthServiceService.usuario[0].nombre)
 				userHasTable = true;
     });
     
@@ -118,6 +133,32 @@ export class HomePage implements OnInit {
 			x.className = x.className.replace("show", "");
 		}, 3000);
 		console.info("objeto", x);
+	}
+
+
+  presentSwal(stringWord){
+		Swal.fire(
+			{
+			title: 'Exito!',
+			text: stringWord,
+			icon: 'success',
+			}
+		);
+
+		//this.router.navigate(['/tabs/tab2']);
+	}
+
+
+presentSwalError(stringWord){
+		Swal.fire(
+			{
+			title: 'Error!',
+			text: stringWord,
+			icon: 'error',
+			}
+			);
+
+		//this.router.navigate(['/tabs/tab2']);
 	}
 
 }

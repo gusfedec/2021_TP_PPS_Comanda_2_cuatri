@@ -2,6 +2,7 @@ import { OrderStatus } from './../../componentes/OrderStatus/OrderStatus';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FirebaseAuth } from "../../services/firebase-auth";
 import { AuthServiceService } from '../../services/auth-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: "app-menu",
@@ -14,6 +15,7 @@ export class MenuPage implements OnInit {
 
 	
 	@Output() showError = new EventEmitter();
+	@Output() redirect = new EventEmitter();
 
 	productos = [];
 	mesas = [];
@@ -28,10 +30,14 @@ export class MenuPage implements OnInit {
 		
 		this.totalPrice += Number(product.price);
 
-		if(product.tiempo != undefined)
-			this.totalTime += Number(product.tiempo);
+
 
 		product.quantity += 1;
+
+		if(product.tiempo != undefined){
+			this.newBiggerTime();
+			//this.totalTime += Number(product.tiempo);
+		}
 	}
 
 	lessQuantity(product) {
@@ -41,16 +47,37 @@ export class MenuPage implements OnInit {
 		if (product.quantity > 0){
 			product.quantity -= 1;
 			this.totalPrice -= Number(product.price);
-			this.totalTime -= Number(product.tiempo);
+			this.newBiggerTime();
+			//this.totalTime -= Number(product.tiempo);
 		}
+	}
+
+
+	newBiggerTime(){
+
+		var biggerTime = 0;
+		this.productos.forEach((prod) => {
+			console.log(prod);
+
+			if (prod.quantity > 0) {
+				if(prod.tiempo > biggerTime)
+					biggerTime = prod.tiempo;
+			}
+
+		});
+
+		this.totalTime = biggerTime;
+
 	}
 
 	user = AuthServiceService.usuario;
 	totalPrice : number = 0;
 	totalTime = 0;
 
-
+	spinner = false;
 	crearOrder() {
+
+		this.spinner = true;
 		var productsInOrder = [];
 		console.log("user", this.user);
 
@@ -81,8 +108,19 @@ export class MenuPage implements OnInit {
 				}
 			});
 
+			if(order.table == null || order.table == ''){
+				this.spinner = false;
+				this.presentSwalError("Debe tener una mesa asignada para crear una orden.");
+				this.redirect.emit('Principal');
+				return;
+			}
+
 			console.log(order);
-			this.fireAuth.saveNewEntity(FirebaseAuth.orders, order);
+			this.fireAuth.saveNewEntity(FirebaseAuth.orders, order).then(resp=>{
+				this.spinner = false;
+				this.presentSwal("Orden Creada exitosamente!");
+				this.redirect.emit('Order');
+			});
 
 			
 		}
@@ -90,7 +128,23 @@ export class MenuPage implements OnInit {
 			this.showError.emit("Debe elegir algún producto para crear la orden.");
 		}
 
+	}
 
-		
+	
+	presentSwalError(message) {
+		Swal.fire({
+			title: "Error!",
+			text: message,
+			icon: "error",
+		});
+	}
+	presentSwal(message) {
+		Swal.fire({
+			title: "Buen Provecho!",
+			text: message,
+			icon: "success",
+		});
+
+		//this.router.navigate(['/tabs/tab2']);
 	}
 }

@@ -62,7 +62,7 @@
   <ion-button color="medium" expand="full" (click)="registrar('')"> Registrarse </ion-button>
 
   <app-camara-de-fotos (linkFoto)="asignarFoto($event)"> </app-camara-de-fotos>
-  <app-scanner-dni *ngIf = "tipoDeLogin != 'anon'" class="clienteImage" (datosUsuario)="datosDeScanner()" [format]="'PDF_417'"></app-scanner-dni>
+  <app-scanner-dni *ngIf = "tipoDeLogin != 'anon'" class="clienteImage" (datosUsuario)="datosDeScanner($event)" [format]="'PDF_417'"></app-scanner-dni>
 
 	<div id="snackbar">{{Mensajes}}</div>
 

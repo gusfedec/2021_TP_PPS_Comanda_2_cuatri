@@ -150,6 +150,7 @@ export class ListaOrdersPage implements OnInit {
 	  var foundforBartender = false;
 
 	  order.forEach(element => {
+		if(element.status != OrderStatus.Finalizado){
 		  element.products.forEach(product => {
 			if(!foundforBartender){
 				if(this.usuario[0].rol == 'Bartender'){
@@ -164,6 +165,7 @@ export class ListaOrdersPage implements OnInit {
 				}
 			}
 		  });
+		}
 	  }); 
 
 	  return foundforBartender;
@@ -178,6 +180,7 @@ export class ListaOrdersPage implements OnInit {
 
 	order.forEach(element => {
 		
+		if(element.status != OrderStatus.Finalizado){
 			element.products.forEach(product => {
 				if(!foundforCocinero){
 					if(this.usuario[0].rol == Roles.Cocinero){
@@ -194,6 +197,7 @@ export class ListaOrdersPage implements OnInit {
 					}
 				}
 			});
+		}
 	}); 
 	return foundforCocinero;
 }
@@ -204,6 +208,7 @@ isThereAnyProductForMozo(order){
 
 	order.forEach(element => {
 
+		if(element.status != OrderStatus.Finalizado){
 			element.products.forEach(product => {
 				if(!foundforMozo){
 
@@ -221,6 +226,7 @@ isThereAnyProductForMozo(order){
 					}
 				}
 			});
+		}
 	}); 
 	return foundforMozo;
 }
