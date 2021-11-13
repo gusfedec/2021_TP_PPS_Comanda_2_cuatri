@@ -240,7 +240,11 @@ isThereAnyProductForMozo(order){
 
 
   pagarOrden(order){
-	this.router.navigate(['/folder/pagar']);
+	this.spinner = true;
+	order.status = OrderStatus.SolicitudDePago;
+    this.fireAuth.saveExistingEntity(FirebaseAuth.orders, order, order.id).then(result => {
+		this.router.navigate(['/folder/Pagar']);
+	});
   }
 
 

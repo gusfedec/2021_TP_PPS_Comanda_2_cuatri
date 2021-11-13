@@ -1,6 +1,16 @@
 <ion-content>
 		
-  <div class="chatbox">
+
+
+  <div *ngIf="usuario[0].rol == 'Mozo'">
+    <div *ngFor="let order of mesaDeChat" (click)="seleccionDeChat(order)">
+		<h2>Mesa {{order.table.numero}}</h2>
+      <img style="margin-right: 0; width:7%; height:7%"
+            src="https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/mesa.png?alt=media&token=5bfbcf95-c74b-4fa3-a35a-119665768b97"/>
+    </div>
+  </div>
+
+  <div class="chatbox" *ngIf="selectedOrder.length > 0">
     <!--div class="top-bar" [ngClass]="{'ppsa': seccion === 'A', 'ppsb' : seccion === 'B' }">
       <!--div class="avatar"><p>{{seccion}}
           </p></div>
@@ -15,10 +25,12 @@
       </b></p>
     </div-->
 
-    <div class="middle" style="overflow-y:scroll;">
-      <div *ngIf="mesaDeChat.length > 0">
 
-        <div *ngFor="let message of mesaDeChat[0].chat">
+
+    <div class="middle" style="overflow-y:scroll;">
+      <div *ngIf="selectedOrder.length > 0">
+
+        <div *ngFor="let message of selectedOrder.chat">
 
           <div *ngIf="message.mail != usuario[0].mail" class="incoming">
             <div class="leftBubble" [ngClass]="{'blueTeam': seccion === 'A', 'redTeam' : seccion === 'B' }">

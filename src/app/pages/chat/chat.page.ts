@@ -1,3 +1,4 @@
+import { Roles } from './../../componentes/Roles/Roles';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { Component } from '@angular/core';
 import { FirebaseAuth } from '../../services/firebase-auth';
@@ -14,8 +15,20 @@ export class ChatPage {
 
   ngOnInit() {
     
-    this.fireAuth.bringEntityWithFilterKeyValue(FirebaseAuth.mesas, "assignedTo.mail", this.usuario[0].mail, this.mesaDeChat);
+    if(this.usuario[0].rol == Roles.Cliente){
+    	this.fireAuth.bringEntityWithFilterKeyValue(FirebaseAuth.mesas, "assignedTo.mail", this.usuario[0].mail, this.mesaDeChat);
+		this.selectedOrder = this.mesaDeChat;
+	}
+	if(this.usuario[0].rol == Roles.Mozo){
+		this.fireAuth.bringEntity(FirebaseAuth.mesas, this.mesaDeChat);
+		this.selectedOrder.length = 0;
+	}
+  }
 
+  selectedOrder = [];
+
+  seleccionDeChat(order){
+	this.selectedOrder.push(order);
   }
 
 

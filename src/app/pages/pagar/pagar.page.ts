@@ -23,7 +23,12 @@ export class PagarPage implements OnInit {
 
   ngOnInit() {
     this.spinner = true;
+
+    if(this.usuario[0].rol == Roles.Cliente)
 		this.fireAuth.bringEntityWithFilterKeyValue(FirebaseAuth.orders, "table.assignedTo.mail" , this.usuario[0].mail, this.orders);
+    else if(this.usuario[0].rol == Roles.Mozo)
+     	this.fireAuth.bringEntityWithFilterKeyValue(FirebaseAuth.orders, "table.status" , OrderStatus.SolicitudDePago, this.orders);
+
 
     let intervalId = setInterval(() => {
       this.spinner = false;

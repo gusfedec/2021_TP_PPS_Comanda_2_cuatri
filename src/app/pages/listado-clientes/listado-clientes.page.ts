@@ -16,7 +16,7 @@ export class ListadoClientesPage implements OnInit {
   spinner = true;
 
   ngOnInit(): void {
-    this.fireAuth.bringClientsUnapproved(FirebaseAuth.clientes, this.clientes);
+    this.fireAuth.bringEntityWithFilterKeyValue(FirebaseAuth.users,"rol", "Cliente" ,this.clientes);
     var counter = 0;
     let intervalId = setInterval(() => {
       this.spinner = false;
@@ -27,7 +27,7 @@ export class ListadoClientesPage implements OnInit {
 
   aceptar(cliente){
     cliente.aprobado = true;
-    this.fireAuth.saveExistingEntity(FirebaseAuth.clientes, cliente, cliente.id).then(result => {
+    this.fireAuth.saveExistingEntity(FirebaseAuth.users, cliente, cliente.id).then(result => {
       this.email.enviarEmail("registro_aprobado", cliente.mail, cliente.nombre);
       this.presentSwal('aprobado');
     });
@@ -36,7 +36,7 @@ export class ListadoClientesPage implements OnInit {
 
   denegar(cliente){
     cliente.aprobado = false;
-    this.fireAuth.saveExistingEntity(FirebaseAuth.clientes, cliente, cliente.id).then(result => {
+    this.fireAuth.saveExistingEntity(FirebaseAuth.users, cliente, cliente.id).then(result => {
       this.email.enviarEmail("registro_rechazado", cliente.mail, cliente.nombre);
       this.presentSwal('denegado');
     });  
