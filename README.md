@@ -89,5 +89,11 @@ AA- Juego para un 20% de descuento. **(Argañaras)**
 
 <table><tr><td><img src="https://github.com/gusfedec/2021_TP_PPS_Comanda_2_cuatri/blob/main/capturas/Login.png" alt="Icono" width="300px" height="500px" /></td><td><img src="https://github.com/gusfedec/2021_TP_PPS_Comanda_2_cuatri/blob/main/capturas/MenuInicial.png" alt="Icono" width="300px" height="500px" /></td><td><img src="https://github.com/gusfedec/2021_TP_PPS_Comanda_2_cuatri/blob/main/capturas/Home.png" alt="Icono" width="300px" height="500px" /></td></tr></table>
 
+### Fecha 2 - 30/10
 
+<table><tr><td><img src="https://github.com/gusfedec/2021_TP_PPS_Comanda_2_cuatri/blob/main/capturas/AltaEmpleado1.png" alt="Icono" width="300px" height="500px" /></td><td><img src="https://github.com/gusfedec/2021_TP_PPS_Comanda_2_cuatri/blob/main/capturas/AltaEmpleado2.png" alt="Icono" width="300px" height="500px" /></td><td><img src="https://github.com/gusfedec/2021_TP_PPS_Comanda_2_cuatri/blob/main/capturas/AltaMesa.png" alt="Icono" width="300px" height="500px" /></td></tr><tr><td><img src="https://github.com/gusfedec/2021_TP_PPS_Comanda_2_cuatri/blob/main/capturas/AltaCliente.png" alt="Icono" width="300px" height="500px" /></td></tr></table>
+
+### Fecha 3 - 06/11
+
+<table><tr><td><img src="https://github.com/gusfedec/2021_TP_PPS_Comanda_2_cuatri/blob/main/capturas/AltaProducto.png" alt="Icono" width="300px" height="500px" /></td><td><img src="https://github.com/gusfedec/2021_TP_PPS_Comanda_2_cuatri/blob/main/capturas/Menu%20Dueno.png" alt="Icono" width="300px" height="500px" /></td></tr></table>
 
