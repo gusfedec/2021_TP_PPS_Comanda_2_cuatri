@@ -27,8 +27,8 @@ export class ChatPage {
 
   selectedOrder = [];
 
-  seleccionDeChat(order){
-	this.selectedOrder.push(order);
+  seleccionDeChat(table){
+	this.selectedOrder.push(table);
   }
 
 
@@ -50,22 +50,19 @@ export class ChatPage {
       this.saveMessage();
     }
   
-  
   }
-
 
   saveMessage(){
 
-    if(this.mesaDeChat[0].chat == null || this.mesaDeChat[0].chat == undefined || this.mesaDeChat[0].chat.length >= 0)
-      this.mesaDeChat[0].chat = [];
+    if(this.selectedOrder[0].chat == null || this.selectedOrder[0].chat == undefined || this.selectedOrder[0].chat.length <= 0)
+      this.selectedOrder[0].chat = [];
 
 
     //TODO: Enviar Push Event al mozo.
-    this.mesaDeChat[0].chat.push( {"mail": this.usuario[0].mail, "time": new Date(), "message":this.newMessage} );
+    this.selectedOrder[0].chat.push( {"mail": this.usuario[0].mail, "time": new Date(), "message":this.newMessage} );
 
-    this.fireAuth.saveExistingEntity(FirebaseAuth.mesas, this.mesaDeChat[0], this.mesaDeChat[0].id).then(response => { this.newMessage = "" }).catch(error => {});
+    this.fireAuth.saveExistingEntity(FirebaseAuth.mesas, this.selectedOrder[0], this.selectedOrder[0].id).then(response => { this.newMessage = "" }).catch(error => {});
     this.newMessage = "";
-  
   }
 
 

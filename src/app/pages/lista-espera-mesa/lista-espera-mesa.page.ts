@@ -32,7 +32,7 @@ export class ListaEsperaMesaPage implements OnInit {
 
   aceptar(cliente){
     cliente.aprobado = true;
-    this.fireAuth.saveExistingEntity(FirebaseAuth.clientes, cliente, cliente.id).then(result => {
+    this.fireAuth.saveExistingEntity(FirebaseAuth.users, cliente, cliente.id).then(result => {
       this.presentSwal('aprobado');
     });
 
@@ -40,7 +40,7 @@ export class ListaEsperaMesaPage implements OnInit {
 
   denegar(cliente){
     cliente.aprobado = false;
-    this.fireAuth.saveExistingEntity(FirebaseAuth.clientes, cliente, cliente.id).then(result => {
+    this.fireAuth.saveExistingEntity(FirebaseAuth.users, cliente, cliente.id).then(result => {
       this.presentSwal('denegado');
     });  
   }

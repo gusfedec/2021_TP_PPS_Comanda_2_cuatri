@@ -270,10 +270,14 @@ emoji.lmao{background-image: url(https://i.imgur.com/MllSy5N.png);}
   padding: 15px;
   left: 0;
   width: 51%;
-  .bubble {
+  .leftBubble {
+    background: $secondary;
+    //float: right;
+  }
+  /*.bubble {
     background: lighten($dark, 23%);
     float: left;
-  }
+  }*/
   margin-right: auto;
   margin-left: 0;
   border-radius: 40% 60% 50% 0%
@@ -841,3 +845,6 @@ input.textarea {
 }
 
 
+.mesa{
+  height: 70%;
+}

@@ -1,13 +1,34 @@
+<ion-toolbar *ngIf="selectedOrder.length > 0">
+
+	<div class="top-bar ppsa">
+		<!--div class="avatar"><p>{{seccion}}
+</p></!--div-->
+		<br>
+		<img class="avatar"
+			src="https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/mesa.png?alt=media&token=5bfbcf95-c74b-4fa3-a35a-119665768b97" alt="Avatar man">
+		<p><b>
+			<div class="name" style="font-size: 30px"> Mesa {{selectedOrder[0].numero}}</div>
+		</b></p>
+	</div>
+
+</ion-toolbar>
+
+
 <ion-content>
 		
 
 
-  <div *ngIf="usuario[0].rol == 'Mozo'">
-    <div *ngFor="let order of mesaDeChat" (click)="seleccionDeChat(order)">
-		<h2>Mesa {{order.table.numero}}</h2>
-      <img style="margin-right: 0; width:7%; height:7%"
+  <div *ngIf="usuario[0].rol == 'Mozo' && selectedOrder.length <= 0 ">
+
+    <ion-card *ngFor="let table of mesaDeChat" (click)="seleccionDeChat(table)">
+		<ion-item color="medium">
+			<ion-label style="margin: center;"class="ionLabel">Mesa {{table.numero}}
+			</ion-label>
+			<img class="mesa"
             src="https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/mesa.png?alt=media&token=5bfbcf95-c74b-4fa3-a35a-119665768b97"/>
-    </div>
+		</ion-item>
+    </ion-card>
+
   </div>
 
   <div class="chatbox" *ngIf="selectedOrder.length > 0">
@@ -29,11 +50,9 @@
 
     <div class="middle" style="overflow-y:scroll;">
       <div *ngIf="selectedOrder.length > 0">
-
-        <div *ngFor="let message of selectedOrder.chat">
-
+        <div *ngFor="let message of selectedOrder[0].chat">
           <div *ngIf="message.mail != usuario[0].mail" class="incoming">
-            <div class="leftBubble" [ngClass]="{'blueTeam': seccion === 'A', 'redTeam' : seccion === 'B' }">
+            <div class="leftBubble">
 
                 <b *ngIf="message.mail !== usuario[0].mail" style="color:chocolate;">
                   {{message.mail.split('@')[0]}}:

@@ -25,3 +25,9 @@
 	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
 	animation: fadein 0.5s, fadeout 0.5s 2.5s;
   }
+
+
+
+ion-content{
+    --background: #fff url("https://images3.alphacoders.com/914/thumb-1920-914159.png") no-repeat center center / cover;
+}

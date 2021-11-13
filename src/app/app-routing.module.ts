@@ -74,6 +74,10 @@ const routes: Routes = [
     path: 'pagar',
     loadChildren: () => import('./pages/pagar/pagar.module').then( m => m.PagarPageModule)
   },
+  {
+    path: 'game-poll-pay',
+    loadChildren: () => import('./pages/game-poll-pay/game-poll-pay.module').then( m => m.GamePollPayPageModule)
+  },
 
 
 

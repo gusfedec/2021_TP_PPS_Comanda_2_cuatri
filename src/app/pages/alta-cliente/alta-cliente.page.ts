@@ -1,6 +1,7 @@
 import { Roles } from './../../componentes/Roles/Roles';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseAuth } from '../../services/firebase-auth';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-alta-cliente',
@@ -18,7 +19,7 @@ export class AltaClientePage implements OnInit {
     nombre:"",
     apellido: "",
     dni: "",
-    foto: "https://static8.depositphotos.com/1003938/910/v/600/depositphotos_9108382-stock-illustration-funny-cartoon-office-worker.jpg",
+    foto: "https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/hayppyCustomer.png?alt=media&token=377b466a-1275-41e0-be2b-62f4435f7c9a",
     mail:"",
     rol: Roles.Cliente,
     aprobado: false
@@ -73,7 +74,12 @@ export class AltaClientePage implements OnInit {
 
 
     this.fireAuth.saveNewEntity(FirebaseAuth.users, this.usuario).then(response => {
-      this.spinner = false;
+      	this.spinner = false;
+
+      	if(this.tipoDeLogin != 'anon')
+       		this.presentSwal("Cliente Creado, a la espera de aprobación.")
+		else
+			this.presentSwal("Cliente Creado, disfrute su estadía.")
     });
 
   }
@@ -142,5 +148,19 @@ export class AltaClientePage implements OnInit {
 		}, 3000);
 		console.info("objeto", x);
 	}
+
+
+  presentSwal(stringWord){
+    this.spinner = false;
+		Swal.fire(
+			{
+			title: 'Pedido Actualizado!',
+			text: stringWord,
+			icon: 'success',
+			}
+		  );
+
+		//this.router.navigate(['/tabs/tab2']);
+  }
 
 }

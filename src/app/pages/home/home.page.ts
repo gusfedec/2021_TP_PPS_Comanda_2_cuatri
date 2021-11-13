@@ -19,6 +19,7 @@ export class HomePage implements OnInit {
   constructor(public fireAuth: FirebaseAuth) { }
 
   ngOnInit() {
+    this.fireAuth.bringEntity(FirebaseAuth.mesas, this.mesas);
   }
 
   mesas = [];
@@ -36,11 +37,19 @@ export class HomePage implements OnInit {
       });
     }
     
+	console.log("eventMesa",event.search('Mesa '));
+
     if(event.search('Mesa ') > -1){
       console.log('Inside');
       //se pone al cliente en Lista de Espera a mesa. 
       try{
-        await this.asignarClienteAMesa(user, event); 
+		var table = await this.fireAuth.getEntityOneTime(FirebaseAuth.mesas, "qrValue", event);
+		if(this.isThisYourTable(table)){
+			this.redirectTo.emit("Asignado");
+		}
+		else{
+        	this.asignarClienteAMesa(user, table); 
+		}
       }
       catch(error){
         this.MostarMensaje(error.message);
@@ -49,12 +58,17 @@ export class HomePage implements OnInit {
     }
 
 
-    this.redirectTo.emit(event);
+    //this.redirectTo.emit(event);
   }
 
+  isThisYourTable(table){
+	if(table.assignedTo != null && table.assignedTo != undefined && table.assignedTo != '' && table.assignedTo.nombre == AuthServiceService.usuario[0].nombre){
+		return true;
+	}
+	return false;
+}
 
-
-  async asignarClienteAMesa(user, qrValue){
+  async asignarClienteAMesa(user, table){
     console.log("user", user);
     if(user == null || user == undefined)
       throw new Error("Primero debe loggearse.");
@@ -62,7 +76,11 @@ export class HomePage implements OnInit {
       throw new Error("El usuario no esta en Lista de Espera, escanear el QR para estarlo.");
     }
 
-      var table = await this.fireAuth.getEntityOneTime(FirebaseAuth.mesas, "qrValue", qrValue);
+    if(this.isUserAlreadyAssigned()){
+		throw new Error("Usted ya tiene una mesa asignada.");
+    }
+
+    //var table = await this.fireAuth.getEntityOneTime(FirebaseAuth.mesas, "qrValue", qrValue);
 
     if(table.assignedTo == null || table.assignedTo == undefined || table.assignedTo == ""){
       table.assignedTo = user;
@@ -75,7 +93,16 @@ export class HomePage implements OnInit {
       console.log("table", table);
   }
 
-
+  isUserAlreadyAssigned(){
+    var userHasTable = false;
+    this.mesas.forEach(mesa => {
+        if(!userHasTable)
+        	if(mesa.assignedTo != null && mesa.assignedTo != undefined && mesa.assignedTo.nombre == AuthServiceService.usuario[0].nombre)
+				userHasTable = true;
+    });
+    
+    return userHasTable;
+  }
 
   Mensajes;
   MostarMensaje(mensaje: string = "este es el mensaje", ganador: boolean = false) {

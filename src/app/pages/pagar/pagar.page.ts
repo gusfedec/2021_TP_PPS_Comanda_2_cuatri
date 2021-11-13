@@ -24,11 +24,14 @@ export class PagarPage implements OnInit {
   ngOnInit() {
     this.spinner = true;
 
-    if(this.usuario[0].rol == Roles.Cliente)
+    if(this.usuario[0].rol == Roles.Cliente){
 		this.fireAuth.bringEntityWithFilterKeyValue(FirebaseAuth.orders, "table.assignedTo.mail" , this.usuario[0].mail, this.orders);
-    else if(this.usuario[0].rol == Roles.Mozo)
-     	this.fireAuth.bringEntityWithFilterKeyValue(FirebaseAuth.orders, "table.status" , OrderStatus.SolicitudDePago, this.orders);
-
+		this.selectedOrder = this.orders;
+	}
+    else if(this.usuario[0].rol == Roles.Mozo){
+     	this.fireAuth.bringEntityWithFilterKeyValue(FirebaseAuth.orders, "status" , OrderStatus.SolicitudDePago, this.orders);
+		this.selectedOrder.length = 0;
+	}
 
     let intervalId = setInterval(() => {
       this.spinner = false;
@@ -43,5 +46,43 @@ export class PagarPage implements OnInit {
     
     return (total - total * (descuento/100)) + (total * (propina/100));
   }
+
+  confirmarPago(){
+
+    this.spinner = true;
+    this.selectedOrder[0].status = OrderStatus.Finalizado;
+    var table = this.selectedOrder[0].table;
+    table.assignedTo = '';
+    table.chat = '';
+
+    this.fireAuth.saveExistingEntity(FirebaseAuth.mesas, table, table.id);
+    this.fireAuth.saveExistingEntity(FirebaseAuth.orders, this.selectedOrder[0], this.selectedOrder[0].id).then(resp =>{
+        this.spinner = false;
+        this.presentSwal("Pedido pago, Mesa liberada!");
+    });
+  
+  }
+
+    
+  presentSwal(stringWord){
+    this.spinner = false;
+		Swal.fire(
+			{
+			title: 'Pedido Actualizado!',
+			text: stringWord,
+			icon: 'success',
+			}
+		  );
+
+		//this.router.navigate(['/tabs/tab2']);
+  }
+
+  selectedOrder = [];
+  seleccionDeMesa(order){
+    this.selectedOrder.length = 0;
+    this.selectedOrder.push(order);
+  }
+
+
 
 }

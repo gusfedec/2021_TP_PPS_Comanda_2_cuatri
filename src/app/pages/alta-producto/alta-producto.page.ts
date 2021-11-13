@@ -30,6 +30,10 @@ export class AltaProductoPage implements OnInit {
     fotos: [],
     qr: '',
     qrValue: '',
+    category: 'comida',
+    price: '',
+    tiempo: ''
+
   };
 
   asignarFoto(url) {
@@ -176,5 +180,21 @@ export class AltaProductoPage implements OnInit {
 			reader.readAsDataURL(image);
 		}
 	}
+
+
+
+  isMen = false;
+  isGirl = false;
+  sexo(evento, sex) {
+    this.producto.category = sex;
+    if (sex == 'bebida') {
+      this.isGirl = false;
+      this.isMen = true;
+    }
+    if (sex == 'comida') {
+      this.isMen = false;
+      this.isGirl = true;
+    }
+  }
 
 }

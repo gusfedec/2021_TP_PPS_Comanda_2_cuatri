@@ -3,18 +3,28 @@
 
 	<app-spinner [shouldISpin]="spinner"></app-spinner>
 
-	<ion-title size="small" *ngIf="orders.length == 0 && !spinner"> No hay Ordenes Nuevas</ion-title>
 
-	<ion-title size="small" *ngIf="usuario[0].rol == 'Bartender' && !isThereAnyProductForBartender(orders)"> No hay Ordenes Nuevas</ion-title>
-  <ion-title size="small" *ngIf="usuario[0].rol == 'Cocinero' && !isThereAnyProductForCocinero(orders)"> No hay Ordenes Nuevas</ion-title>
+  <ion-item *ngIf="(orders.length == 0 && !spinner) 
+                    || (usuario[0].rol == 'Bartender' && !isThereAnyProductForBartender(orders))
+					|| (usuario[0].rol == 'Cocinero' && !isThereAnyProductForCocinero(orders)) 
+					|| (usuario[0].rol == 'Mozo' && !isThereAnyProductForMozo(orders))"color="medium">
+    <ion-title size="small" *ngIf="orders.length == 0 && !spinner"> No hay Ordenes Nuevas</ion-title>
 
-  <ion-title size="small" *ngIf="usuario[0].rol == 'Mozo' && !isThereAnyProductForMozo(orders)"> No hay Productos para llevar </ion-title>
+    <ion-title size="small" *ngIf="usuario[0].rol == 'Bartender' && !isThereAnyProductForBartender(orders)"> No hay Ordenes Nuevas</ion-title>
+    <ion-title size="small" *ngIf="usuario[0].rol == 'Cocinero' && !isThereAnyProductForCocinero(orders)"> No hay Ordenes Nuevas</ion-title>
+  
+    <ion-title size="small" *ngIf="usuario[0].rol == 'Mozo' && !isThereAnyProductForMozo(orders)"> No hay Productos para llevar </ion-title>  
+  </ion-item>
 
 
 <div *ngIf="isThereAnyProductForBartender(orders) || isThereAnyProductForCocinero(orders) || isThereAnyProductForMozo(orders) || (usuario[0].rol == 'Cliente' && orders.length)">
   <ion-card *ngFor="let order of orders; let i = index" color="medium">
 
-    
+	<div class="description">
+        <h3 class="status">Estado Orden: {{order.status}}</h3>
+    </div>
+
+
     <div class="item" *ngFor="let product of order.products">
       <!--div class="buttons">
         <span class="delete-btn"></span>
