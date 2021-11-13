@@ -1,0 +1,48 @@
+<ion-content>
+
+	<app-spinner [shouldISpin]="spinner"></app-spinner>
+
+	<div *ngIf="orders.length > 0" class="box">
+		<div class='inner'>
+			<h1>Mesa {{orders[0].table.numero}}</h1>
+			<div class='info clearfix'>
+
+				<div class='info clearfix' *ngFor="let product of orders[0].products; let i = index">
+
+					<div class='wp' style="width:40%">
+						<label *ngIf="i == 0">Producto</label>
+						<h2>{{product.nombre}}</h2>
+					</div>
+
+					<div class='wp' style="width:20%">
+						<label *ngIf="i == 0">Cantidad</label>
+						<h2>{{product.quantity}}</h2>
+					</div>
+
+					<div class='wp' style="width:40%">
+						<label *ngIf="i == 0">Precio</label>
+						<h2>{{product.price*product.quantity}}</h2>
+					</div>
+					
+					<br>
+
+				</div>
+			</div>
+
+			<div class='total clearfix'>
+				<h2>Descuento: <p>{{orders[0].descuento}}%</p></h2>
+			</div>
+
+			<div class='total clearfix'>
+				<h2>Propina: <p>{{orders[0].propina}}%</p></h2>
+			</div>
+
+			<div class='total clearfix'>
+				<h2>Total: <p>$ {{ calcularPropina(orders[0]) }}</p></h2>
+			</div>
+			
+		</div>
+	</div>
+
+
+</ion-content>

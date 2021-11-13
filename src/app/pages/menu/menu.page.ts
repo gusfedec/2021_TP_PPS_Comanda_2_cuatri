@@ -66,8 +66,10 @@ export class MenuPage implements OnInit {
 			var order = {
 				products: productsInOrder,
 				table: '',
-				price: this.totalPrice,
-				status: OrderStatus.Nuevo
+				total: this.totalPrice,
+				status: OrderStatus.Nuevo,
+				descuento: 0,
+				propina: 0
 			};
 			
 			this.mesas.forEach(mesa =>{

@@ -22,7 +22,7 @@ import { FolderPageRoutingModule } from './folder-routing.module';
 import { FolderPage } from './folder.page';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { FechaPipe } from '../pipes/fecha.pipe';
-
+import { PagarPage } from '../pages/pagar/pagar.page';
 @NgModule({
   imports: [
     CommonModule,
@@ -47,7 +47,8 @@ import { FechaPipe } from '../pipes/fecha.pipe';
     MenuPage,
     ChatPage,
     FechaPipe,
-    ListaOrdersPage
+    ListaOrdersPage,
+    PagarPage
   ],
 })
 export class FolderPageModule {}

@@ -106,7 +106,12 @@ export class AppComponent {
     },
     {
       title: 'Order',url: '/folder/Order', icon: '', rol: Roles.Cliente, img: 'https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/4057741.png?alt=media&token=0537f82c-9b42-4b42-98b3-34e0baf546a2'
+    },
+    {
+      title: 'Pagar',url: '/folder/Pagar', icon: '', rol: Roles.Cliente, img: 'https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/1052814.png?alt=media&token=3a4f1cd4-9128-46b0-b07d-8cc23bf68539'
     }
+
+    //https://firebasestorage.googleapis.com/v0/b/comanda-be3d2.appspot.com/o/1052814.png?alt=media&token=3a4f1cd4-9128-46b0-b07d-8cc23bf68539
     
   ];
 
