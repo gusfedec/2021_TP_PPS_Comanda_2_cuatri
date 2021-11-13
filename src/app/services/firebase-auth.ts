@@ -20,6 +20,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
+import { Observable } from "rxjs";
 
 //import {AngularFirestore} from 'angularfire2/firestore';
 //import { auth } from 'firebase/app';
@@ -53,6 +54,9 @@ export class FirebaseAuth {
 	static users = "/users";
 	static clientes = "/clientes";
 	static mesas = "/mesas";
+	static productos = "/productos";
+	static orders = "/orders";
+
 
 
 	async login(user) {
@@ -212,13 +216,95 @@ export class FirebaseAuth {
 				var postData = doc.payload.doc.data();
 				console.log(doc.payload.doc['id'], " => ", postData);
 				postData.id = doc.payload.doc['id'];
-				if(postData.aprobado == null || postData.aprobado == undefined || postData.aprobado == ''){
+
+				if((postData.aprobado == null || postData.aprobado == undefined || postData.aprobado == '') && postData.rol == 'Cliente'){
 					returnObject.push(postData);
 				}
 
 			});
 			return returnObject;
 		});
+	}
+
+
+	bringEntityWithFilterKeyValue(path, key, value, returnObject) {
+		console.log("bringEntityWithFilterKeyValue");
+		console.log("key", key);
+		console.log("value", value);
+
+		var imageRef = this.afs.collection<any>(path);
+
+		imageRef.snapshotChanges().forEach(snapshot => {
+			var array = new Array();
+			returnObject.length = 0;
+			
+			var postData = snapshot.forEach(doc => {
+
+
+				var postData = doc.payload.doc.data();
+				console.log(doc.payload.doc['id'], " => ", postData);
+				postData.id = doc.payload.doc['id'];
+				
+				console.log("KEY", key);
+				console.log(key.includes('.'));
+
+				if(key.includes('.')){
+					var keysArray = key.split('.');
+					var leng = keysArray.length;
+					var i = 1;
+					var finalElement = postData;
+					keysArray.forEach(element => {
+						try{
+							console.log("element", element);
+							console.log(finalElement);
+
+							if(finalElement != null)
+								finalElement = finalElement[element];
+
+							if(leng == i){
+								if(finalElement != null && finalElement != undefined && finalElement == value)
+									returnObject.push(postData);
+							}
+							i++;
+						}
+						catch(error){
+							console.log("ERROR", error);
+						}
+					});
+				}
+				else if(postData[key] != null && postData[key] != undefined && postData[key] == value ){
+					returnObject.push(postData);
+				}
+				console.log("Objeto a devolver", returnObject);
+
+			});
+			return returnObject;
+		});
+	}
+
+	async getEntityOneTime(path, key, value) {
+		var bigTable;
+		await this.afs.collection<any>(path).get().forEach(element => {
+			console.log("element", element);
+			console.log("element docs", element.docs);
+
+			element.docs.forEach(doc =>{
+				console.log(doc["id"]);
+				console.log("data", doc.data());
+				var table = doc.data();
+				table.id = doc["id"];
+			
+				if(table[key] != null && table[key] != undefined && table[key] == value){
+					bigTable = table;
+					return table;
+				}
+
+			});
+			console.log("element metadata", element.metadata);
+			
+		});
+
+		return bigTable;
 	}
 
 	bringEntityWithFilterString2(path, turnos, filterWord){
@@ -254,6 +340,23 @@ export class FirebaseAuth {
 	saveNewEntity(path, value){
 		return new Promise<any>((resolve, reject) => {
 			this.afs.collection(path).add(value)
+				.then(
+					(res) => {
+						resolve(res)
+					},
+					err => reject(err)
+				)
+		})
+	}
+
+	
+	addChat(path, value, mail) {
+		return new Promise<any>((resolve, reject) => {
+			this.afs.collection(path).add({
+				message: value,
+				email: mail,
+				time: new Date()
+			})
 				.then(
 					(res) => {
 						resolve(res)

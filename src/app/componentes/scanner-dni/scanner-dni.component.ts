@@ -18,7 +18,12 @@ export class ScannerDNIComponent implements OnInit {
 
   ngOnInit() {}
 
-  usuario;
+  usuario = {
+		"sexo": "",
+		"nombre": "",
+		"apellido": "",
+		"dni": "",
+	};
 
   barScanneroptions : BarcodeScannerOptions = {
 		formats: "PDF_417" 
@@ -33,7 +38,6 @@ export class ScannerDNIComponent implements OnInit {
 			this.usuario.apellido = auxBarCode[1];
 			this.usuario.dni = auxBarCode[4];
 			this.usuario.sexo = auxBarCode[3];
-      this.usuario.nombre = auxBarCode[2];
       
       this.datosUsuario.emit(this.usuario);
 

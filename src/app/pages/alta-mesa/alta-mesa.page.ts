@@ -38,7 +38,14 @@ export class AltaMesaPage implements OnInit {
 		this.mesa.foto = url;
 	}
 
-	ngOnInit() { }
+	roles=[];
+	ngOnInit() {
+
+		for (let rol in TipoDeMesa) {
+			this.roles.push(rol);
+		}
+		
+	 }
 
 	spinner;
 	createdCode;

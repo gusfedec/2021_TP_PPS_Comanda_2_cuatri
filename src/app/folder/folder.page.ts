@@ -22,4 +22,22 @@ export class FolderPage implements OnInit {
     this.folder = event;
   }
 
+
+  
+  Mensajes: string;
+	MostarMensaje(mensaje, ganador: boolean = false) {
+		this.Mensajes = mensaje;
+		var x = document.getElementById("snackbar");
+		if (ganador) {
+			x.className = "show Ganador";
+		} else {
+			x.className = "show Perdedor";
+		}
+		var modelo = this;
+		setTimeout(function () {
+			x.className = x.className.replace("show", "");
+		}, 3000);
+		console.info("objeto", x);
+	}
+
 }
