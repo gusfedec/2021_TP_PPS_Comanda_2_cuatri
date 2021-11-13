@@ -83,5 +83,11 @@ AA- Juego para un 20% de descuento. **(Argañaras)**
 
 <img src="https://github.com/gusfedec/2021_TP_PPS_Comanda_2_cuatri/blob/main/resources/splash.png" alt="Icono" width="500px" height="500px" />
 
+---------------------------------------------------------------------------------------------------
+
+### Fecha 1 - 23/10
+
+<table><tr><td><img src="https://github.com/gusfedec/2021_TP_PPS_Comanda_2_cuatri/blob/main/capturas/Login.png" alt="Icono" width="300px" height="500px" /></td><td><img src="https://github.com/gusfedec/2021_TP_PPS_Comanda_2_cuatri/blob/main/capturas/MenuInicial.png" alt="Icono" width="300px" height="500px" /></td><td><img src="https://github.com/gusfedec/2021_TP_PPS_Comanda_2_cuatri/blob/main/capturas/Home.png" alt="Icono" width="300px" height="500px" /></td></tr></table>
+
 
 
